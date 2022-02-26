@@ -577,3 +577,5 @@ FodyWeavers.xsd
 *GvhProjectSettings.xml
 *AndroidLogcatSettings.asset
 *EditorUserSettings.asset
+CarGameMobile/Temp/
+CarGameMobile/Library/
