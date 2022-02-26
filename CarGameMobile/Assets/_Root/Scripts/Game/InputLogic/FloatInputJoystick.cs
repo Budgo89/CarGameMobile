@@ -64,7 +64,7 @@ namespace Game.InputLogic
                 return;
 
             float axisOffset = CrossPlatformInputManager.GetAxis("Horizontal");
-            float moveValue = _speed * _inputMultiplier * Time.deltaTime * axisOffset;
+            float moveValue = _inputMultiplier * Time.deltaTime * axisOffset;
 
             float abs = Mathf.Abs(moveValue);
             float sign = Mathf.Sign(moveValue);
