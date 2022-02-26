@@ -12,9 +12,13 @@ namespace Ui
         public void Init(UnityAction startGame) =>
             _buttonStart.onClick.AddListener(startGame);
 
-        //public void Init(UnityAction settingsGame) => _buttonSettings.onClick.AddListener(settingsGame);
+        public void InitSettings(UnityAction settingsGame) 
+            => _buttonSettings.onClick.AddListener(settingsGame);
 
-        public void OnDestroy() =>
+        public void OnDestroy()
+        {
             _buttonStart.onClick.RemoveAllListeners();
+            _buttonSettings.onClick.RemoveAllListeners();
+        }
     }
 }
