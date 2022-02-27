@@ -7,6 +7,7 @@ namespace Ui
 {
     internal class MainMenuController : BaseController
     {
+       
         private readonly ResourcePath _resourcePath = new ResourcePath("Prefabs/MainMenu");
         private readonly ProfilePlayer _profilePlayer;
         private readonly MainMenuView _view;
@@ -31,6 +32,7 @@ namespace Ui
 
         private void StartGame() =>
             _profilePlayer.CurrentState.Value = GameState.Game;
+        
 
         private void SettingsGame() => _profilePlayer.CurrentState.Value = GameState.Settings;
     }
