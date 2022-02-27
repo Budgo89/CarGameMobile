@@ -1,6 +1,7 @@
 using Assets._Root.Scripts.Services.Ads;
 using Profile;
 using Services.Analytics;
+using Services.IAP;
 using UnityEngine;
 
 internal class EntryPoint : MonoBehaviour
@@ -11,6 +12,7 @@ internal class EntryPoint : MonoBehaviour
     [SerializeField] private Transform _placeForUi;
     [SerializeField] private AnalyticsManager _analytics;
     [SerializeField] private UnityAdsTools _adsTools;
+    [SerializeField] private IAPService _iapService;
 
     private MainController _mainController;
 
@@ -18,7 +20,7 @@ internal class EntryPoint : MonoBehaviour
     private void Awake()
     {
         var profilePlayer = new ProfilePlayer(SpeedCar, InitialState);
-        _mainController = new MainController(_placeForUi, profilePlayer, _analytics, _adsTools);
+        _mainController = new MainController(_placeForUi, profilePlayer, _analytics, _adsTools, _iapService);
     }
 
     private void OnDestroy()
