@@ -9,7 +9,7 @@ namespace Ui
     {
         [SerializeField] private Button _buttonStart;
         [SerializeField] private Button _buttonSettings;
-        
+        [SerializeField] private Button _buttonAdvertising;
 
         public void Init(UnityAction startGame)
         {
@@ -20,10 +20,14 @@ namespace Ui
         public void InitSettings(UnityAction settingsGame) 
             => _buttonSettings.onClick.AddListener(settingsGame);
 
+        public void InitAdvertising(UnityAction advertising)
+            => _buttonAdvertising.onClick.AddListener(advertising);
+
         public void OnDestroy()
         {
             _buttonStart.onClick.RemoveAllListeners();
             _buttonSettings.onClick.RemoveAllListeners();
+            _buttonAdvertising.onClick.RemoveAllListeners();
         }
     }
 }
