@@ -5,7 +5,7 @@ namespace Game.InputLogic
 {
     internal class InputKeyView : BaseInputView
     {
-        [SerializeField] private float _inputMultiplier = 0.05f;
+        [SerializeField] private float _speed = 0.05f;
 
 
         private void Start() => UpdateManager.SubscribeToUpdate(Move);
@@ -15,7 +15,7 @@ namespace Game.InputLogic
         private void Move()
         {
             float axisOffset = Input.GetAxis("Horizontal");
-            float moveValue = _inputMultiplier * Time.deltaTime * axisOffset;
+            float moveValue = _speed * Time.deltaTime * axisOffset;
 
             float abs = Mathf.Abs(moveValue);
             float sign = Mathf.Sign(moveValue);
