@@ -1,23 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Game.InputLogic;
-using JoostenProductions;
+﻿using JoostenProductions;
 using UnityEngine;
 
 namespace Game.InputLogic
 {
-    internal class InputKey : BaseInputView
+    internal class InputKeyView : BaseInputView
     {
         [SerializeField] private float _inputMultiplier = 0.05f;
 
-        private void Start() =>
-            UpdateManager.SubscribeToUpdate(Move);
 
-        private void OnDestroy() =>
-            UpdateManager.UnsubscribeFromUpdate(Move);
+        private void Start() => UpdateManager.SubscribeToUpdate(Move);
+
+        private void OnDestroy() => UpdateManager.UnsubscribeFromUpdate(Move);
 
         private void Move()
         {

@@ -20,10 +20,8 @@ namespace Game.InputLogic
             _speed = speed;
         }
 
-        protected virtual void OnLeftMove(float value) =>
-            _leftMove.Value = value;
+        protected virtual void OnLeftMove(float value) => _leftMove.Value = value;
 
-        protected virtual void OnRightMove(float value) =>
-            _rightMove.Value = value;
+        protected virtual void OnRightMove(float value) => _rightMove.Value = value;
     }
 }

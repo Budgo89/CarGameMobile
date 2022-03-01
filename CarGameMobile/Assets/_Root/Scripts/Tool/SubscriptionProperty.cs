@@ -18,10 +18,8 @@ namespace Tool
         }
 
 
-        public void SubscribeOnChange(Action<TValue> subscriptionAction) =>
-            _onChangeValue += subscriptionAction;
+        public void SubscribeOnChange(Action<TValue> subscriptionAction) => _onChangeValue += subscriptionAction;
 
-        public void UnSubscribeOnChange(Action<TValue> unsubscriptionAction) =>
-            _onChangeValue -= unsubscriptionAction;
+        public void UnSubscribeOnChange(Action<TValue> unsubscriptionAction) => _onChangeValue -= unsubscriptionAction;
     }
 }

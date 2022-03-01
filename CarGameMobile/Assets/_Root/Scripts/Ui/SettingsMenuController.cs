@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Profile;
+﻿using Profile;
 using Tool;
-using Ui;
 using UnityEngine;
 
 namespace Ui
@@ -29,7 +23,6 @@ namespace Ui
             AddGameObject(objectView);
             return objectView.GetComponent<SettingsMenuView>();
         }
-
         private void Bask() => _profilePlayer.CurrentState.Value = GameState.Start;
     }
 }

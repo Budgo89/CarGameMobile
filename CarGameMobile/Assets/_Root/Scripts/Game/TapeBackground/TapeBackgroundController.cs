@@ -46,10 +46,8 @@ namespace Game.TapeBackground
             return objectView.GetComponent<TapeBackgroundView>();
         }
 
-        private void MoveLeft(float value) =>
-            _diff.Value = -value;
+        private void MoveLeft(float value) => _diff.Value = -value;
 
-        private void MoveRight(float value) =>
-            _diff.Value = value;
+        private void MoveRight(float value) => _diff.Value = value;
     }
 }

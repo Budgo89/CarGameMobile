@@ -21,7 +21,6 @@ namespace Game.TapeBackground
             _diff?.UnSubscribeOnChange(Move);
         }
 
-
         private void Move(float value)
         {
             foreach (var background in _backgrounds)

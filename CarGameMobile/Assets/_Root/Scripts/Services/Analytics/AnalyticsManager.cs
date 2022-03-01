@@ -14,12 +14,9 @@ namespace Services.Analytics
                 new UnityAnalyticsService()
             };
 
+        public void SendMainMenuOpened() => SendEvent("MainMenuOpened");
 
-        public void SendMainMenuOpened() =>
-            SendEvent("MainMenuOpened");
-
-        public void SendGameStart() =>
-            SendEvent("Send Game Start");
+        public void SendGameStart() => SendEvent("Send Game Start");
 
         private void SendEvent(string eventName)
         {
