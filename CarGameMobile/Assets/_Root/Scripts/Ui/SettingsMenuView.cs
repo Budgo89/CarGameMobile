@@ -12,7 +12,7 @@ namespace Ui
     public class SettingsMenuView : MonoBehaviour
     {
         [SerializeField] private Button _buttonBask;
-        public void InitBack(UnityAction mainMenu) 
+        public void Init(UnityAction mainMenu) 
             => _buttonBask.onClick.AddListener(mainMenu);
 
         public void OnDestroy()

@@ -20,7 +20,7 @@ namespace Ui
         {
             _profilePlayer = profilePlayer;
             _view = LoadView(placeForUi);
-            _view.InitBack(Bask);
+            _view.Init(Bask);
         }
         public SettingsMenuView LoadView(Transform placeForUi)
         {
