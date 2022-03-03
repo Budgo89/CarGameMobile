@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 using UnityEngine.Advertisements;
 
@@ -21,6 +21,7 @@ namespace Services.Ads.UnityAds
             Advertisement.AddListener(this);
         }
 
+
         public void Play()
         {
             Load();
@@ -31,6 +32,7 @@ namespace Services.Ads.UnityAds
         protected abstract void OnPlaying();
         protected abstract void Load();
 
+
         public void OnUnityAdsReady(string placementId)
         {
             if (IsIdMy(placementId) == false)
@@ -40,7 +42,8 @@ namespace Services.Ads.UnityAds
             BecomeReady?.Invoke();
         }
 
-        public void OnUnityAdsDidError(string message) => Error($"Error: {message}");
+        public void OnUnityAdsDidError(string message) =>
+            Error($"Error: {message}");
 
         public void OnUnityAdsDidStart(string placementId)
         {
@@ -76,6 +79,7 @@ namespace Services.Ads.UnityAds
         }
 
         private bool IsIdMy(string id) => _id == id;
+
         private void Log(string message) => Debug.Log(WrapMessage(message));
         private void Error(string message) => Debug.LogError(WrapMessage(message));
         private string WrapMessage(string message) => $"[{GetType().Name}] {message}";

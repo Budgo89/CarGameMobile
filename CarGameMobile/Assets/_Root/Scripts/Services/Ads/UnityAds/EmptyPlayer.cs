@@ -1,4 +1,4 @@
-﻿namespace Services.Ads.UnityAds
+namespace Services.Ads.UnityAds
 {
     internal class EmptyPlayer : UnityAdsPlayer
     {

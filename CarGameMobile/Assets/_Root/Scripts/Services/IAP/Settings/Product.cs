@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using UnityEngine;
 using UnityEngine.Purchasing;
 
-namespace Services.IAP.Settings
+namespace Services.IAP
 {
     [Serializable]
     internal struct Product

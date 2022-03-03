@@ -1,8 +1,6 @@
-﻿using Services.IAP.Settings;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Purchasing;
-using Product = Services.IAP.Settings.Product;
 
 namespace Services.IAP
 {
@@ -56,6 +54,7 @@ namespace Services.IAP
             Error("Initialization Failed");
         }
 
+
         public void Buy(string id)
         {
             if (IsInitialized)
@@ -83,6 +82,7 @@ namespace Services.IAP
             PurchaseFailed?.Invoke();
         }
 
+
         public string GetCost(string productID)
         {
             UnityEngine.Purchasing.Product product = _controller.products.WithID(productID);
@@ -97,10 +97,9 @@ namespace Services.IAP
                 Error("RestorePurchases FAIL. Not initialized.");
         }
 
+
         private void Log(string message) => Debug.Log(WrapMessage(message));
-
         private void Error(string message) => Debug.LogError(WrapMessage(message));
-
         private string WrapMessage(string message) => $"[{GetType().Name}] {message}";
     }
 }

@@ -1,8 +1,8 @@
-﻿using UnityEngine.Events;
+using UnityEngine.Events;
 
 namespace Services.Ads
 {
-    internal class IAdsService
+    internal interface IAdsService
     {
         IAdsPlayer InterstitialPlayer { get; }
         IAdsPlayer RewardedPlayer { get; }

@@ -19,9 +19,11 @@ namespace Game.InputLogic
         private bool _usingJoystick;
 
 
-        private void Start() => UpdateManager.SubscribeToUpdate(Move);
+        private void Start() =>
+            UpdateManager.SubscribeToUpdate(Move);
 
-        private void OnDestroy() => UpdateManager.UnsubscribeFromUpdate(Move);
+        private void OnDestroy() =>
+            UpdateManager.UnsubscribeFromUpdate(Move);
 
 
         public void OnPointerDown(PointerEventData eventData)
@@ -53,7 +55,8 @@ namespace Game.InputLogic
             SetActive(false);
         }
 
-        private void SetActive(bool active) => _container.alpha = active ? _enabledAlpha : _disabledAlpha;
+        private void SetActive(bool active) =>
+            _container.alpha = active ? _enabledAlpha : _disabledAlpha;
 
         private void Move()
         {
@@ -61,7 +64,7 @@ namespace Game.InputLogic
                 return;
 
             float axisOffset = CrossPlatformInputManager.GetAxis("Horizontal");
-            float moveValue = _inputMultiplier * Time.deltaTime * axisOffset;
+            float moveValue = _speed * _inputMultiplier * Time.deltaTime * axisOffset;
 
             float abs = Mathf.Abs(moveValue);
             float sign = Mathf.Sign(moveValue);

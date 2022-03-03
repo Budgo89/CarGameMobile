@@ -1,5 +1,5 @@
-﻿using Services.Analytics.UnityAnalytics;
 using UnityEngine;
+using Services.Analytics.UnityAnalytics;
 
 namespace Services.Analytics
 {
@@ -14,9 +14,6 @@ namespace Services.Analytics
                 new UnityAnalyticsService()
             };
 
-        public void SendMainMenuOpened() => SendEvent("MainMenuOpened");
-
-        public void SendGameStart() => SendEvent("Send Game Start");
 
         private void SendEvent(string eventName)
         {

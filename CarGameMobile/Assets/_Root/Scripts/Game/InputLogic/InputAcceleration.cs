@@ -8,15 +8,17 @@ namespace Game.InputLogic
         [SerializeField] private float _inputMultiplier = 0.05f;
 
 
-        private void Start() => UpdateManager.SubscribeToUpdate(Move);
+        private void Start() =>
+            UpdateManager.SubscribeToUpdate(Move);
 
-        private void OnDestroy() => UpdateManager.UnsubscribeFromUpdate(Move);
+        private void OnDestroy() =>
+            UpdateManager.UnsubscribeFromUpdate(Move);
 
 
         private void Move()
         {
             Vector3 direction = CalcDirection();
-            float moveValue = direction.sqrMagnitude * _inputMultiplier * _speed;
+            float moveValue = _speed * _inputMultiplier * Time.deltaTime * direction.x;
 
             float abs = Mathf.Abs(moveValue);
             float sign = Mathf.Sign(moveValue);

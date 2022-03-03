@@ -9,9 +9,11 @@ namespace Game.InputLogic
         [SerializeField] private float _inputMultiplier = 10;
 
 
-        private void Start() => UpdateManager.SubscribeToUpdate(Move);
+        private void Start() =>
+            UpdateManager.SubscribeToUpdate(Move);
 
-        private void OnDestroy() => UpdateManager.UnsubscribeFromUpdate(Move);
+        private void OnDestroy() =>
+            UpdateManager.UnsubscribeFromUpdate(Move);
 
 
         private void Move()
