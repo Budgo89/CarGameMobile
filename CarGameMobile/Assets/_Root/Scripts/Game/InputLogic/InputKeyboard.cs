@@ -19,11 +19,17 @@ namespace Game.InputLogic
         {
             float moveValue = _speed * _inputMultiplier * Time.deltaTime;
 
-            if (Input.GetKey(KeyCode.LeftArrow))
+            if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
                 OnLeftMove(moveValue);
 
-            if (Input.GetKey(KeyCode.RightArrow))
+            if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
                 OnRightMove(moveValue);
+
+            if (Input.GetKey(KeyCode.Space))
+            {
+                OnJump(moveValue);
+            }
+               
         }
     }
 }

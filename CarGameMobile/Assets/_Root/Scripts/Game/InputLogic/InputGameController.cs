@@ -13,10 +13,11 @@ namespace Game.InputLogic
         public InputGameController(
             SubscriptionProperty<float> leftMove,
             SubscriptionProperty<float> rightMove,
+            SubscriptionProperty<float> jump,
             TransportModel transportModel)
         {
             _view = LoadView();
-            _view.Init(leftMove, rightMove, transportModel.Speed);
+            _view.Init(leftMove, rightMove, jump, transportModel.Speed);
         }
 
         private BaseInputView LoadView()

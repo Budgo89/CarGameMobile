@@ -16,6 +16,7 @@ namespace Game
         private readonly ProfilePlayer _profilePlayer;
         private readonly SubscriptionProperty<float> _leftMoveDiff;
         private readonly SubscriptionProperty<float> _rightMoveDiff;
+        private readonly SubscriptionProperty<float> _jumpMoveDiff;
 
         private readonly TapeBackgroundController _tapeBackgroundController;
         private readonly InputGameController _inputGameController;
@@ -28,6 +29,7 @@ namespace Game
             _profilePlayer = profilePlayer;
             _leftMoveDiff = new SubscriptionProperty<float>();
             _rightMoveDiff = new SubscriptionProperty<float>();
+            _jumpMoveDiff = new SubscriptionProperty<float>();
 
             _tapeBackgroundController = CreateTapeBackground();
             _inputGameController = CreateInputGameController();
@@ -38,7 +40,7 @@ namespace Game
 
         private TapeBackgroundController CreateTapeBackground()
         {
-            var tapeBackgroundController = new TapeBackgroundController(_leftMoveDiff, _rightMoveDiff);
+            var tapeBackgroundController = new TapeBackgroundController(_leftMoveDiff, _rightMoveDiff, _jumpMoveDiff);
             AddController(tapeBackgroundController);
 
             return tapeBackgroundController;
@@ -46,7 +48,7 @@ namespace Game
 
         private InputGameController CreateInputGameController()
         {
-            var inputGameController = new InputGameController(_leftMoveDiff, _rightMoveDiff, _profilePlayer.CurrentTransport);
+            var inputGameController = new InputGameController(_leftMoveDiff, _rightMoveDiff, _jumpMoveDiff, _profilePlayer.CurrentTransport);
             AddController(inputGameController);
 
             return inputGameController;
