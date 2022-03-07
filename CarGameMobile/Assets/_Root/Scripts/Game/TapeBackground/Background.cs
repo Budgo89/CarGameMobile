@@ -30,24 +30,23 @@ namespace Game.TapeBackground
                 Jump(value);
             }
         }
-
-        private float y = 0;
-        private bool jump = true;
+        
+        private bool _jump = true;
         private float _jumpSpeed = 10f;
         private GameObject _player;
-        private Rigidbody2D _rigidbody2D;
+        private Rigidbody2D _rigidbody;
         private void Jump (float value)
         {
             if (_player == null)
             {
                 _player = GameObject.Find("Car(Clone)");
-                _rigidbody2D = _player.GetComponent<Rigidbody2D>();
+                _rigidbody = _player.GetComponent<Rigidbody2D>();
             }
             Vector3 position = transform.position;
-            if (jump)
+            if (_jump)
             {
-                jump = false;
-                _rigidbody2D.AddForce(Vector2.up * _jumpSpeed, ForceMode2D.Impulse);
+                _jump = false;
+                _rigidbody.AddForce(Vector2.up * _jumpSpeed, ForceMode2D.Impulse);
                 StartCoroutine(JumpCoroutine());
             }
 
@@ -56,7 +55,8 @@ namespace Game.TapeBackground
         IEnumerator JumpCoroutine()
         {
             yield return new WaitForSeconds(2f);
-            jump = true;
+            _jump = true;
+            StopCoroutine(JumpCoroutine());
         }
     }
 }

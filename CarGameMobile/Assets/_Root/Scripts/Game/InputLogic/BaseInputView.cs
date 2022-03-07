@@ -30,6 +30,6 @@ namespace Game.InputLogic
             _rightMove.Value = value;
 
         protected virtual void OnJump(float value) =>
-            _jump.Value = value;
+            _jump.Value = 0;
     }
 }
