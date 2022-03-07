@@ -5,6 +5,7 @@ using UnityEngine;
 internal class EntryPoint : MonoBehaviour
 {
     private const float SpeedCar = 15f;
+    private const float JumpCar = 20f;
     private const GameState InitialState = GameState.Start;
     private const TransportType TransportType = Game.TransportType.Car;
 
@@ -15,7 +16,7 @@ internal class EntryPoint : MonoBehaviour
 
     private void Awake()
     {
-        var profilePlayer = new ProfilePlayer(SpeedCar, TransportType, InitialState);
+        var profilePlayer = new ProfilePlayer(SpeedCar, JumpCar, TransportType, InitialState);
         _mainController = new MainController(_placeForUi, profilePlayer);
     }
 

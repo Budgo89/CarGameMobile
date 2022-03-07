@@ -9,7 +9,7 @@ namespace Game.TapeBackground
         [SerializeField] private float _rightBorder;
         [SerializeField] private float _relativeSpeedRate;
 
-
+        private float _jumpSpeed = 10f;
         public void Move(float value)
         {
             if (value != 0)
@@ -27,12 +27,12 @@ namespace Game.TapeBackground
             }
             else
             {
-                Jump(value);
+                Jump(_jumpSpeed);
             }
         }
         
         private bool _jump = true;
-        private float _jumpSpeed = 10f;
+        
         private GameObject _player;
         private Rigidbody2D _rigidbody;
         private void Jump (float value)
@@ -46,7 +46,7 @@ namespace Game.TapeBackground
             if (_jump)
             {
                 _jump = false;
-                _rigidbody.AddForce(Vector2.up * _jumpSpeed, ForceMode2D.Impulse);
+                _rigidbody.AddForce(Vector2.up * value, ForceMode2D.Impulse);
                 StartCoroutine(JumpCoroutine());
             }
 
