@@ -370,16 +370,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aaecf48347544f409c8b84038942f0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _productLibrary: {fileID: 11400000, guid: a86ce6e753d19a24e9869c60833a6c01, type: 2}
-  <Initialized>k__BackingField:
-    m_PersistentCalls:
-      m_Calls: []
-  <PurchaseSucceed>k__BackingField:
-    m_PersistentCalls:
-      m_Calls: []
-  <PurchaseFailed>k__BackingField:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &1165112438
 GameObject:
   m_ObjectHideFlags: 0
@@ -559,10 +549,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c1f1f3a311c471e921b56ebcc0f1a0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _configMain: {fileID: 11400000, guid: ba2e62c49c1c9fd41963c8926055d1b6, type: 2}
   _placeForUi: {fileID: 1903552}
-  _analytics: {fileID: 514717366}
-  _adsTools: {fileID: 42288290}
-  _iapService: {fileID: 674625579}
 --- !u!1 &2102793372
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,8 +21,7 @@ namespace Features.Inventory
             [NotNull] IItemsRepository repository,
             [NotNull] IInventoryModel inventoryModel)
         {
-            _model
-                = inventoryModel ?? throw new ArgumentNullException(nameof(inventoryModel));
+            _model = inventoryModel ?? throw new ArgumentNullException(nameof(inventoryModel));
 
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
 

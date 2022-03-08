@@ -1,13 +1,10 @@
 using System;
-using Tool;
 using Profile;
 using System.Collections.Generic;
 using UnityEngine;
 using Features.Inventory;
-using Features.Inventory.Items;
 using Features.Shed.Upgrade;
 using JetBrains.Annotations;
-using Object = UnityEngine.Object;
 
 namespace Features.Shed
 {
@@ -17,80 +14,24 @@ namespace Features.Shed
 
     internal class ShedController : BaseController, IShedController
     {
-        private readonly ResourcePath _viewPath = new ResourcePath("Prefabs/Shed/ShedView");
-        private readonly ResourcePath _dataSourcePath = new ResourcePath("Configs/Shed/UpgradeItemConfigDataSource");
-
-        private readonly ShedView _view;
+        private readonly IShedView _view;
         private readonly ProfilePlayer _profilePlayer;
-        private readonly InventoryController _inventoryController;
-        private readonly UpgradeHandlersRepository _upgradeHandlersRepository;
+        private readonly IInventoryController _inventoryController;
+        private readonly IUpgradeHandlersRepository _upgradeHandlersRepository;
 
 
         public ShedController(
-            [NotNull] Transform placeForUi,
+            [NotNull] IShedView view,
+            [NotNull] IUpgradeHandlersRepository upgradeHandlersRepository,
             [NotNull] ProfilePlayer profilePlayer)
         {
-            if (placeForUi == null)
-                throw new ArgumentNullException(nameof(placeForUi));
+            _profilePlayer = profilePlayer ?? throw new ArgumentNullException(nameof(profilePlayer));
 
-            _profilePlayer
-                = profilePlayer ?? throw new ArgumentNullException(nameof(profilePlayer));
-
-            _upgradeHandlersRepository = CreateRepository();
-            _inventoryController = CreateInventoryController(placeForUi);
-            _view = LoadView(placeForUi);
+            _upgradeHandlersRepository = upgradeHandlersRepository ?? throw new ArgumentNullException(nameof(upgradeHandlersRepository));
+            
+            _view = view;
 
             _view.Init(Apply, Back);
-        }
-
-
-        private UpgradeHandlersRepository CreateRepository()
-        {
-            UpgradeItemConfig[] upgradeConfigs = ContentDataSourceLoader.LoadUpgradeItemConfigs(_dataSourcePath);
-            var repository = new UpgradeHandlersRepository(upgradeConfigs);
-            AddRepository(repository);
-
-            return repository;
-        }
-
-        private InventoryController CreateInventoryController(Transform placeForUi)
-        {
-            var view = LoadInventoryView(placeForUi);
-            var repository = CreateInventoryRepository();
-            var inventoryController = new InventoryController(view, repository, _profilePlayer.Inventory);
-            AddController(inventoryController);
-
-            return inventoryController;
-        }
-
-        private ShedView LoadView(Transform placeForUi)
-        {
-            GameObject prefab = ResourcesLoader.LoadPrefab(_viewPath);
-            GameObject objectView = Object.Instantiate(prefab, placeForUi, false);
-            AddGameObject(objectView);
-
-            return objectView.GetComponent<ShedView>();
-        }
-
-        private readonly ResourcePath _viewInventoryPath = new ResourcePath("Prefabs/Inventory/InventoryView");
-        private readonly ResourcePath _dataInventorySourcePath = new ResourcePath("Configs/Inventory/ItemConfigDataSource");
-
-        private IItemsRepository CreateInventoryRepository()
-        {
-            ItemConfig[] itemConfigs = ContentDataSourceLoader.LoadItemConfigs(_dataInventorySourcePath);
-            var repository = new ItemsRepository(itemConfigs);
-            AddRepository(repository);
-
-            return repository;
-        }
-
-        private IInventoryView LoadInventoryView(Transform placeForUi)
-        {
-            GameObject prefab = ResourcesLoader.LoadPrefab(_viewInventoryPath);
-            GameObject objectView = Object.Instantiate(prefab, placeForUi);
-            AddGameObject(objectView);
-
-            return objectView.GetComponent<InventoryView>();
         }
 
         private void Apply()
