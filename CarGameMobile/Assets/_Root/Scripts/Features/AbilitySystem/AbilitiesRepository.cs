@@ -8,7 +8,7 @@ namespace Features.AbilitySystem
         IReadOnlyDictionary<string, IAbility> Items { get; }
     }
 
-    internal class AbilitiesRepository : Repository<string, IAbility, AbilityItemConfig>
+    internal class AbilitiesRepository : Repository<string, IAbility, AbilityItemConfig>, IAbilitiesRepository
     {
         public AbilitiesRepository(IEnumerable<AbilityItemConfig> configs) : base(configs)
         { }

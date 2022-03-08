@@ -8,6 +8,7 @@ using Game.Transport;
 using Game.Transport.Boat;
 using Game.Transport.Car;
 using Features.AbilitySystem;
+using Features.AbilitySystem.Abilities;
 
 namespace Game
 {
@@ -71,10 +72,35 @@ namespace Game
 
         private AbilitiesController CreateAbilitiesController(Transform placeForUi)
         {
-            var abilitiesController = new AbilitiesController(placeForUi, _transportController);
+            var view = LoadAbilitiesView(placeForUi);
+            var abilityItemConfigs = LoadAbilityItemConfigs();
+            var repository = CreateAbilitiesRepository(abilityItemConfigs);
+            var abilitiesController = new AbilitiesController(view, repository, _transportController, abilityItemConfigs);
             AddController(abilitiesController);
 
             return abilitiesController;
         }
+
+        private readonly ResourcePath _viewPath = new ResourcePath("Prefabs/Ability/AbilitiesView");
+        private readonly ResourcePath _dataSourcePath = new ResourcePath("Configs/Ability/AbilityItemConfigDataSource");
+
+        private IAbilitiesRepository CreateAbilitiesRepository(AbilityItemConfig[] abilityItemConfigs)
+        {
+            var repository = new AbilitiesRepository(abilityItemConfigs);
+            AddRepository(repository);
+
+            return repository;
+        }
+
+        private IAbilitiesView LoadAbilitiesView(Transform placeForUi)
+        {
+            GameObject prefab = ResourcesLoader.LoadPrefab(_viewPath);
+            GameObject objectView = UnityEngine.Object.Instantiate(prefab, placeForUi, false);
+            AddGameObject(objectView);
+
+            return objectView.GetComponent<AbilitiesView>();
+        }
+        private AbilityItemConfig[] LoadAbilityItemConfigs() =>
+            ContentDataSourceLoader.LoadAbilityItemConfigs(_dataSourcePath);
     }
 }

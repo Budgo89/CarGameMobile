@@ -1,4 +1,3 @@
-using JoostenProductions;
 using Tool;
 using UnityEngine;
 
@@ -17,15 +16,8 @@ namespace Game.InputLogic
             base.Init(leftMove, rightMove,  jump, speed);
             Input.gyro.enabled = true;
         }
-
-
-        private void Start() =>
-            UpdateManager.SubscribeToUpdate(Move);
-
-        private void OnDestroy() =>
-            UpdateManager.UnsubscribeFromUpdate(Move);
         
-        private void Move()
+        protected override void Move()
         {
             if (!SystemInfo.supportsGyroscope)
                 return;

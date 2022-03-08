@@ -4,11 +4,13 @@ using UnityEngine;
 
 internal class EntryPoint : MonoBehaviour
 {
-    private const float SpeedCar = 15f;
-    private const float JumpCar = 20f;
-    private const GameState InitialState = GameState.Start;
-    private const TransportType TransportType = Game.TransportType.Car;
+    [Header("Settings")]
+    [SerializeField] private float SpeedCar = 15f;
+    [SerializeField] private float JumpCar = 20f;
+    [SerializeField] private GameState InitialState = GameState.Start;
+    [SerializeField] private TransportType TransportType = TransportType.Car;
 
+    [Header("Attachments")]
     [SerializeField] private Transform _placeForUi;
 
     private MainController _mainController;
