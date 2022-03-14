@@ -18,7 +18,6 @@ namespace Features.Shed
     internal class ShedController : BaseController, IShedController
     {
         private readonly ResourcePath _viewPath = new ResourcePath("Prefabs/Shed/ShedView");
-        private readonly ResourcePath _dataSourcePath = new ResourcePath("Configs/Shed/UpgradeItemConfigDataSource");
 
         private readonly ShedView _view;
         private readonly ProfilePlayer _profilePlayer;
@@ -26,41 +25,22 @@ namespace Features.Shed
         private readonly UpgradeHandlersRepository _upgradeHandlersRepository;
 
         public ShedController(
-             [NotNull] Transform placeForUi,
-             [NotNull] ProfilePlayer profilePlayer)
+            [NotNull] UpgradeHandlersRepository upgradeHandlersRepository,
+            [NotNull] Transform placeForUi,
+            [NotNull] ProfilePlayer profilePlayer)
         {
             if (placeForUi == null)
                 throw new ArgumentNullException(nameof(placeForUi));
 
             _profilePlayer
                 = profilePlayer ?? throw new ArgumentNullException(nameof(profilePlayer));
-
-            _upgradeHandlersRepository = CreateRepository();
+            _upgradeHandlersRepository = upgradeHandlersRepository;
             _inventoryController = CreateInventoryController(placeForUi);
+            AddController(_inventoryController);
             _view = LoadView(placeForUi);
 
             _view.Init(Apply, Back);
         }
-
-
-        private UpgradeHandlersRepository CreateRepository()
-        {
-            UpgradeItemConfig[] upgradeConfigs = ContentDataSourceLoader.LoadUpgradeItemConfigs(_dataSourcePath);
-            var repository = new UpgradeHandlersRepository(upgradeConfigs);
-            AddRepository(repository);
-
-            return repository;
-        }
-
-        private ShedView LoadView(Transform placeForUi)
-        {
-            GameObject prefab = ResourcesLoader.LoadPrefab(_viewPath);
-            GameObject objectView = Object.Instantiate(prefab, placeForUi, false);
-            AddGameObject(objectView);
-
-            return objectView.GetComponent<ShedView>();
-        }
-
         private InventoryController CreateInventoryController(Transform placeForUi)
         {
             IInventoryView inventoryView = LoadInventoryView(placeForUi);
@@ -68,7 +48,6 @@ namespace Features.Shed
             IItemsRepository itemsRepository = CreateItemsRepository();
 
             var inventoryController = new InventoryController(inventoryView, inventoryModel, itemsRepository);
-            AddController(inventoryController);
 
             return inventoryController;
         }
@@ -95,6 +74,14 @@ namespace Features.Shed
             return repository;
         }
 
+        private ShedView LoadView(Transform placeForUi)
+        {
+            GameObject prefab = ResourcesLoader.LoadPrefab(_viewPath);
+            GameObject objectView = Object.Instantiate(prefab, placeForUi, false);
+            AddGameObject(objectView);
+
+            return objectView.GetComponent<ShedView>();
+        }
 
         private void Apply()
         {
@@ -112,7 +99,6 @@ namespace Features.Shed
             _profilePlayer.CurrentState.Value = GameState.Start;
             Log($"Back. Current Speed: {_profilePlayer.CurrentTransport.Speed}");
         }
-
 
         private void UpgradeWithEquippedItems(
             IUpgradable upgradable,

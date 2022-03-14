@@ -102,5 +102,6 @@ namespace Game
         }
         private AbilityItemConfig[] LoadAbilityItemConfigs() =>
             ContentDataSourceLoader.LoadAbilityItemConfigs(_dataSourcePath);
+
     }
 }

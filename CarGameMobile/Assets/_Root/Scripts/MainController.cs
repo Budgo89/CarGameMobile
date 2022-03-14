@@ -1,6 +1,10 @@
+using Features.Inventory;
+using Features.Inventory.Items;
 using Features.Shed;
+using Features.Shed.Upgrade;
 using Game;
 using Profile;
+using Tool;
 using Ui;
 using UnityEngine;
 
@@ -8,11 +12,12 @@ internal class MainController : BaseController
 {
     private readonly Transform _placeForUi;
     private readonly ProfilePlayer _profilePlayer;
-
+    private InventoryController _inventoryController;
     private MainMenuController _mainMenuController;
     private SettingsMenuController _settingsMenuController;
     private ShedController _shedController;
     private GameController _gameController;
+    private UpgradeHandlersRepository _upgradeHandlersRepository;
 
 
     public MainController(Transform placeForUi, ProfilePlayer profilePlayer)
@@ -41,15 +46,27 @@ internal class MainController : BaseController
                 _mainMenuController = new MainMenuController(_placeForUi, _profilePlayer);
                 break;
             case GameState.Settings:
+               
                 _settingsMenuController = new SettingsMenuController(_placeForUi, _profilePlayer);
                 break;
             case GameState.Shed:
-                _shedController = new ShedController(_placeForUi, _profilePlayer);
+                _upgradeHandlersRepository = CreateRepository();
+                _shedController = new ShedController(_upgradeHandlersRepository, _placeForUi, _profilePlayer);
                 break;
             case GameState.Game:
                 _gameController = new GameController(_placeForUi, _profilePlayer);
                 break;
         }
+    }
+    
+    private UpgradeHandlersRepository CreateRepository()
+    {
+        ResourcePath _dataSourcePath = new ResourcePath("Configs/Shed/UpgradeItemConfigDataSource");
+        UpgradeItemConfig[] upgradeConfigs = ContentDataSourceLoader.LoadUpgradeItemConfigs(_dataSourcePath);
+        var repository = new UpgradeHandlersRepository(upgradeConfigs);
+        AddRepository(repository);
+
+        return repository;
     }
 
     private void DisposeControllers()
