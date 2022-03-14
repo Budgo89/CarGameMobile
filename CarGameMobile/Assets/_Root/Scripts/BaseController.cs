@@ -6,7 +6,7 @@ using Object = UnityEngine.Object;
 
 internal abstract class BaseController : IDisposable
 {
-    private List<BaseController> _baseControllers;
+    private List<IDisposable> _disposables;
     private List<GameObject> _gameObjects;
     private bool _isDisposed;
 
@@ -18,23 +18,23 @@ internal abstract class BaseController : IDisposable
 
         _isDisposed = true;
 
-        DisposeBaseControllers();
+        DisposeDisposables();
         DisposeGameObjects();
 
         OnDispose();
     }
 
-    private void DisposeBaseControllers()
+    private void DisposeDisposables()
     {
-        if (_baseControllers == null)
+        if (_disposables == null)
             return;
 
-        foreach (BaseController baseController in _baseControllers)
-            baseController.Dispose();
+        foreach (IDisposable disposables in _disposables)
+            disposables.Dispose();
 
-        _baseControllers.Clear();
+        _disposables.Clear();
     }
-
+    
     private void DisposeGameObjects()
     {
         if (_gameObjects == null)
@@ -49,15 +49,30 @@ internal abstract class BaseController : IDisposable
     protected virtual void OnDispose() { }
 
 
-    protected void AddController(BaseController baseController)
-    {
-        _baseControllers ??= new List<BaseController>();
-        _baseControllers.Add(baseController);
-    }
+    protected void AddController(BaseController baseController) =>
+        AddDisposable(baseController);
 
+    protected void AddRepository(IRepository repository) =>
+        AddDisposable(repository);
+
+    private void AddDisposable(IDisposable disposable)
+    {
+        _disposables ??= new List<IDisposable>();
+        _disposables.Add(disposable);
+    }
     protected void AddGameObject(GameObject gameObject)
     {
         _gameObjects ??= new List<GameObject>();
         _gameObjects.Add(gameObject);
     }
+
+    protected void Log(string message) =>
+        Debug.Log(WrapMessage(message));
+
+    protected void Error(string message) =>
+        Debug.LogError(WrapMessage(message));
+
+    private string WrapMessage(string message) =>
+        $"[{GetType().Name}] {message}";
+
 }

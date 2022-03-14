@@ -1,8 +1,6 @@
-﻿using Services.IAP.Settings;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Purchasing;
-using Product = Services.IAP.Settings.Product;
 
 namespace Services.IAP
 {
