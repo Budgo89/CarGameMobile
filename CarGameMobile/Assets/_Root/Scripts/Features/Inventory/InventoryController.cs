@@ -18,8 +18,8 @@ namespace Features.Inventory
 
         public InventoryController(
             [NotNull] IInventoryView view,
-            [NotNull] IItemsRepository repository,
-            [NotNull] IInventoryModel inventoryModel)
+            [NotNull] IInventoryModel inventoryModel,
+            [NotNull] IItemsRepository repository)
         {
             _model = inventoryModel ?? throw new ArgumentNullException(nameof(inventoryModel));
 
