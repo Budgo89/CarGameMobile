@@ -17,7 +17,6 @@ internal class MainController : BaseController
     private SettingsMenuController _settingsMenuController;
     private ShedController _shedController;
     private GameController _gameController;
-    private UpgradeHandlersRepository _upgradeHandlersRepository;
 
 
     public MainController(Transform placeForUi, ProfilePlayer profilePlayer)
@@ -50,8 +49,8 @@ internal class MainController : BaseController
                 _settingsMenuController = new SettingsMenuController(_placeForUi, _profilePlayer);
                 break;
             case GameState.Shed:
-                _upgradeHandlersRepository = CreateRepository();
-                _shedController = new ShedController(_upgradeHandlersRepository, _placeForUi, _profilePlayer);
+                var upgradeHandlersRepository = CreateRepository();
+                _shedController = new ShedController(upgradeHandlersRepository, _placeForUi, _profilePlayer);
                 break;
             case GameState.Game:
                 _gameController = new GameController(_placeForUi, _profilePlayer);
@@ -59,7 +58,7 @@ internal class MainController : BaseController
         }
     }
     
-    private UpgradeHandlersRepository CreateRepository()
+    private IUpgradeHandlersRepository CreateRepository()
     {
         ResourcePath _dataSourcePath = new ResourcePath("Configs/Shed/UpgradeItemConfigDataSource");
         UpgradeItemConfig[] upgradeConfigs = ContentDataSourceLoader.LoadUpgradeItemConfigs(_dataSourcePath);

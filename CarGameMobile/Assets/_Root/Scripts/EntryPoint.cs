@@ -15,11 +15,11 @@ internal class EntryPoint : MonoBehaviour
 
     private void Awake()
     {
-        var SpeedCar = _configMain.SpeedCar;
-        var JumpCar = _configMain.JumpCar;
-        var TransportType = _configMain.TransportType;
-        var InitialState = _configMain.InitialState;
-        var profilePlayer = new ProfilePlayer(SpeedCar, JumpCar, TransportType, InitialState);
+        var speedCar = _configMain.SpeedCar;
+        var jumpCar = _configMain.JumpCar;
+        var transportType = _configMain.TransportType;
+        var initialState = _configMain.InitialState;
+        var profilePlayer = new ProfilePlayer(speedCar, jumpCar, transportType, initialState);
         _mainController = new MainController(_placeForUi, profilePlayer);
     }
 
