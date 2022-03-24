@@ -12,10 +12,10 @@ namespace Profile
         public readonly InventoryModel Inventory;
 
 
-        public ProfilePlayer(float transportSpeed, float transportJump, TransportType transportType, GameState initialState)
+        public ProfilePlayer(float transportSpeed, float transportJumpHeight, TransportType transportType, GameState initialState)
         {
             CurrentState = new SubscriptionProperty<GameState>(initialState);
-            CurrentTransport = new TransportModel(transportSpeed, transportJump, transportType);
+            CurrentTransport = new TransportModel(transportSpeed, transportJumpHeight, transportType);
             Inventory = new InventoryModel();
         }
     }

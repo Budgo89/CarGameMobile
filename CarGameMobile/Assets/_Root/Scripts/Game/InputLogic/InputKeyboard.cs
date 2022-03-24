@@ -6,21 +6,16 @@ namespace Game.InputLogic
     {
         [SerializeField] private float _inputMultiplier = 0.01f;
 
+
         protected override void Move()
         {
             float moveValue = _speed * _inputMultiplier * Time.deltaTime;
 
-            if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+            if (Input.GetKey(KeyCode.LeftArrow))
                 OnLeftMove(moveValue);
 
-            if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+            if (Input.GetKey(KeyCode.RightArrow))
                 OnRightMove(moveValue);
-
-            if (Input.GetKey(KeyCode.Space))
-            {
-                OnJump(moveValue);
-            }
-               
         }
     }
 }

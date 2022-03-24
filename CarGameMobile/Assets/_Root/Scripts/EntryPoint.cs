@@ -1,13 +1,12 @@
-using Configs;
 using Profile;
 using UnityEngine;
 
 internal class EntryPoint : MonoBehaviour
 {
-    [Header("Settings")]
-    [SerializeField] private ConfigMain _configMain;
+    [Header("Initial Settings")]
+    [SerializeField] private InitialProfilePlayer _initialProfilePlayer;
 
-    [Header("Attachments")]
+    [Header("Scene Objects")]
     [SerializeField] private Transform _placeForUi;
 
     private MainController _mainController;
@@ -15,11 +14,7 @@ internal class EntryPoint : MonoBehaviour
 
     private void Awake()
     {
-        var speedCar = _configMain.SpeedCar;
-        var jumpCar = _configMain.JumpCar;
-        var transportType = _configMain.TransportType;
-        var initialState = _configMain.InitialState;
-        var profilePlayer = new ProfilePlayer(speedCar, jumpCar, transportType, initialState);
+        var profilePlayer = CreateProfilePlayer(_initialProfilePlayer);
         _mainController = new MainController(_placeForUi, profilePlayer);
     }
 
@@ -27,4 +22,14 @@ internal class EntryPoint : MonoBehaviour
     {
         _mainController.Dispose();
     }
+
+
+    private ProfilePlayer CreateProfilePlayer(InitialProfilePlayer initialProfilePlayer) =>
+        new ProfilePlayer
+        (
+            initialProfilePlayer.Transport.Speed,
+            initialProfilePlayer.Transport.JumpHeight,
+            initialProfilePlayer.Transport.Type,
+            initialProfilePlayer.State
+        );
 }

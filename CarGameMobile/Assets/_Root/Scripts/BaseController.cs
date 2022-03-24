@@ -6,7 +6,7 @@ using Object = UnityEngine.Object;
 
 internal abstract class BaseController : IDisposable
 {
-    private List<IDisposable> _disposables;
+    private List<IDisposable> _disposableObjects;
     private List<GameObject> _gameObjects;
     private bool _isDisposed;
 
@@ -18,23 +18,23 @@ internal abstract class BaseController : IDisposable
 
         _isDisposed = true;
 
-        DisposeDisposables();
+        DisposeDisposableObjects();
         DisposeGameObjects();
 
         OnDispose();
     }
 
-    private void DisposeDisposables()
+    private void DisposeDisposableObjects()
     {
-        if (_disposables == null)
+        if (_disposableObjects == null)
             return;
 
-        foreach (IDisposable disposables in _disposables)
-            disposables.Dispose();
+        foreach (IDisposable disposableObject in _disposableObjects)
+            disposableObject.Dispose();
 
-        _disposables.Clear();
+        _disposableObjects.Clear();
     }
-    
+
     private void DisposeGameObjects()
     {
         if (_gameObjects == null)
@@ -50,20 +50,21 @@ internal abstract class BaseController : IDisposable
 
 
     protected void AddController(BaseController baseController) =>
-        AddDisposable(baseController);
+        AddDisposableObject(baseController);
 
     protected void AddRepository(IRepository repository) =>
-        AddDisposable(repository);
+        AddDisposableObject(repository);
 
-    private void AddDisposable(IDisposable disposable)
-    {
-        _disposables ??= new List<IDisposable>();
-        _disposables.Add(disposable);
-    }
     protected void AddGameObject(GameObject gameObject)
     {
         _gameObjects ??= new List<GameObject>();
         _gameObjects.Add(gameObject);
+    }
+
+    private void AddDisposableObject(IDisposable disposable)
+    {
+        _disposableObjects ??= new List<IDisposable>();
+        _disposableObjects.Add(disposable);
     }
 
     protected void Log(string message) =>
@@ -74,5 +75,4 @@ internal abstract class BaseController : IDisposable
 
     private string WrapMessage(string message) =>
         $"[{GetType().Name}] {message}";
-
 }

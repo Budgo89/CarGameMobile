@@ -6,9 +6,11 @@ using Features.AbilitySystem.Abilities;
 namespace Features.AbilitySystem
 {
     internal interface IAbilitiesController
-    { }
+    {
 
-    internal class AbilitiesController : BaseController
+    }
+
+    internal class AbilitiesController : BaseController, IAbilitiesController
     {
         private readonly IAbilitiesView _view;
         private readonly IAbilitiesRepository _repository;
@@ -16,23 +18,32 @@ namespace Features.AbilitySystem
 
 
         public AbilitiesController(
-            [NotNull] IAbilitiesView view,
-            [NotNull] IAbilitiesRepository repository,
-            [NotNull] IAbilityActivator abilityActivator,
-            [NotNull] IReadOnlyList<IAbilityItem> abilityItemConfigs)
+            [NotNull] IAbilitiesView abilitiesView,
+            [NotNull] IAbilitiesRepository abilitiesRepository,
+            [NotNull] IEnumerable<IAbilityItem> abilityItems,
+            [NotNull] IAbilityActivator abilityActivator)
         {
+            _view
+                = abilitiesView ?? throw new ArgumentNullException(nameof(abilitiesView));
 
-            _view = view ?? throw new ArgumentNullException(nameof(view));
+            _repository
+                = abilitiesRepository ?? throw new ArgumentNullException(nameof(abilitiesRepository));
 
-            _repository = repository ?? throw new AggregateException(nameof(repository));
+            _abilityActivator
+                = abilityActivator ?? throw new ArgumentNullException(nameof(abilityActivator));
 
-            _abilityActivator = abilityActivator ?? throw new ArgumentNullException(nameof(abilityActivator));
+            if (abilityItems == null)
+                throw new ArgumentNullException(nameof(abilityItems));
 
-            if (abilityItemConfigs == null)
-                throw new ArgumentNullException(nameof(abilityItemConfigs));
-
-            _view.Display(abilityItemConfigs, OnAbilityViewClicked);
+            _view.Display(abilityItems, OnAbilityViewClicked);
         }
+
+        protected override void OnDispose()
+        {
+            _view.Clear();
+            base.OnDispose();
+        }
+
 
         private void OnAbilityViewClicked(string abilityId)
         {

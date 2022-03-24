@@ -16,17 +16,12 @@ namespace Features.Shed.Upgrade
         protected override string GetKey(UpgradeItemConfig config) =>
             config.Id;
 
-        protected override IUpgradeHandler CreateItem(UpgradeItemConfig config)
-        {
-            switch (config.Type)
+        protected override IUpgradeHandler CreateItem(UpgradeItemConfig config) =>
+            config.Type switch
             {
-                case UpgradeType.Speed:
-                    return new SpeedUpgradeHandler(config.Value);
-                case UpgradeType.Jump:
-                    return new JumpUpgradeHandler(config.Value);
-                default:
-                    return StubUpgradeHandler.Default;
-            }
-        }
+                UpgradeType.Speed => new SpeedUpgradeHandler(config.Value),
+                UpgradeType.JumpHeight => new JumpHeightUpgradeHandler(config.Value),
+                _ => StubUpgradeHandler.Default
+            };
     }
 }

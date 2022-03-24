@@ -4,12 +4,10 @@ namespace Features.Shed.Upgrade
     {
         private readonly float _speed;
 
-
         public SpeedUpgradeHandler(float speed) =>
             _speed = speed;
-        
 
-        public void Upgrade(IUpgradable upgradable) => 
+        public void Upgrade(IUpgradable upgradable) =>
             upgradable.Speed = _speed;
     }
 }

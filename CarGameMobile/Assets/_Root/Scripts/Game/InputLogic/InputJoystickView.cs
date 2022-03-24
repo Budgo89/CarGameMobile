@@ -7,6 +7,7 @@ namespace Game.InputLogic
     {
         [SerializeField] private float _inputMultiplier = 10;
 
+
         protected override void Move()
         {
             float axisOffset = CrossPlatformInputManager.GetAxis("Horizontal");

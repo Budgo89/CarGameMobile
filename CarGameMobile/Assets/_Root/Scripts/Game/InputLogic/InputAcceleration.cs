@@ -5,7 +5,8 @@ namespace Game.InputLogic
     internal class InputAcceleration : BaseInputView
     {
         [SerializeField] private float _inputMultiplier = 0.05f;
-        
+
+
         protected override void Move()
         {
             Vector3 direction = CalcDirection();

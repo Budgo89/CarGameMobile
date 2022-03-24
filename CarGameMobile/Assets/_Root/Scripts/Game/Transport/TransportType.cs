@@ -1,6 +1,6 @@
 namespace Game
 {
-    public enum TransportType
+    internal enum TransportType
     {
         Car,
         Boat

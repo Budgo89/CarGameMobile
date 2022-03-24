@@ -1,6 +1,8 @@
 using Tool;
 using System;
+using System.Collections.Generic;
 using Profile;
+using Services;
 using UnityEngine;
 using Game.InputLogic;
 using Game.TapeBackground;
@@ -17,12 +19,11 @@ namespace Game
         private readonly ProfilePlayer _profilePlayer;
         private readonly SubscriptionProperty<float> _leftMoveDiff;
         private readonly SubscriptionProperty<float> _rightMoveDiff;
-        private readonly SubscriptionProperty<float> _jumpMoveDiff;
 
         private readonly TapeBackgroundController _tapeBackgroundController;
         private readonly InputGameController _inputGameController;
         private readonly TransportController _transportController;
-        private readonly AbilitiesController _abilitiesController;
+        private readonly IAbilitiesController _abilitiesController;
 
 
         public GameController(Transform placeForUi, ProfilePlayer profilePlayer)
@@ -30,18 +31,19 @@ namespace Game
             _profilePlayer = profilePlayer;
             _leftMoveDiff = new SubscriptionProperty<float>();
             _rightMoveDiff = new SubscriptionProperty<float>();
-            _jumpMoveDiff = new SubscriptionProperty<float>();
 
             _tapeBackgroundController = CreateTapeBackground();
             _inputGameController = CreateInputGameController();
-            _transportController = CreateTransportController();
+            _transportController = CreateTransportController(profilePlayer.CurrentTransport);
             _abilitiesController = CreateAbilitiesController(placeForUi);
+
+            ServiceLocator.Analytics.SendGameStarted();
         }
 
 
         private TapeBackgroundController CreateTapeBackground()
         {
-            var tapeBackgroundController = new TapeBackgroundController(_leftMoveDiff, _rightMoveDiff, _jumpMoveDiff);
+            var tapeBackgroundController = new TapeBackgroundController(_leftMoveDiff, _rightMoveDiff);
             AddController(tapeBackgroundController);
 
             return tapeBackgroundController;
@@ -49,19 +51,19 @@ namespace Game
 
         private InputGameController CreateInputGameController()
         {
-            var inputGameController = new InputGameController(_leftMoveDiff, _rightMoveDiff, _jumpMoveDiff, _profilePlayer.CurrentTransport);
+            var inputGameController = new InputGameController(_leftMoveDiff, _rightMoveDiff, _profilePlayer.CurrentTransport);
             AddController(inputGameController);
 
             return inputGameController;
         }
 
-        private TransportController CreateTransportController()
+        private TransportController CreateTransportController(TransportModel transportModel)
         {
             TransportController transportController =
                 _profilePlayer.CurrentTransport.Type switch
                 {
-                    TransportType.Car => new CarController(),
-                    TransportType.Boat => new BoatController(),
+                    TransportType.Car => new CarController(transportModel),
+                    TransportType.Boat => new BoatController(transportModel),
                     _ => throw new ArgumentException(nameof(TransportType))
                 };
 
@@ -70,21 +72,25 @@ namespace Game
             return transportController;
         }
 
-        private AbilitiesController CreateAbilitiesController(Transform placeForUi)
+        private IAbilitiesController CreateAbilitiesController(Transform placeForUi)
         {
-            var view = LoadAbilitiesView(placeForUi);
-            var abilityItemConfigs = LoadAbilityItemConfigs();
+            AbilityItemConfig[] abilityItemConfigs = LoadAbilityItemConfigs();
             var repository = CreateAbilitiesRepository(abilityItemConfigs);
-            var abilitiesController = new AbilitiesController(view, repository, _transportController, abilityItemConfigs);
+            var view = LoadAbilitiesView(placeForUi);
+
+            var abilitiesController = new AbilitiesController(view, repository, abilityItemConfigs, _transportController);
             AddController(abilitiesController);
 
             return abilitiesController;
         }
 
-        private readonly ResourcePath _viewPath = new ResourcePath("Prefabs/Ability/AbilitiesView");
-        private readonly ResourcePath _dataSourcePath = new ResourcePath("Configs/Ability/AbilityItemConfigDataSource");
+        private AbilityItemConfig[] LoadAbilityItemConfigs()
+        {
+            var path = new ResourcePath("Configs/Ability/AbilityItemConfigDataSource");
+            return ContentDataSourceLoader.LoadAbilityItemConfigs(path);
+        }
 
-        private IAbilitiesRepository CreateAbilitiesRepository(AbilityItemConfig[] abilityItemConfigs)
+        private IAbilitiesRepository CreateAbilitiesRepository(IEnumerable<IAbilityItem> abilityItemConfigs)
         {
             var repository = new AbilitiesRepository(abilityItemConfigs);
             AddRepository(repository);
@@ -94,14 +100,13 @@ namespace Game
 
         private IAbilitiesView LoadAbilitiesView(Transform placeForUi)
         {
-            GameObject prefab = ResourcesLoader.LoadPrefab(_viewPath);
+            var path = new ResourcePath("Prefabs/Ability/AbilitiesView");
+
+            GameObject prefab = ResourcesLoader.LoadPrefab(path);
             GameObject objectView = UnityEngine.Object.Instantiate(prefab, placeForUi, false);
             AddGameObject(objectView);
 
             return objectView.GetComponent<AbilitiesView>();
         }
-        private AbilityItemConfig[] LoadAbilityItemConfigs() =>
-            ContentDataSourceLoader.LoadAbilityItemConfigs(_dataSourcePath);
-
     }
 }

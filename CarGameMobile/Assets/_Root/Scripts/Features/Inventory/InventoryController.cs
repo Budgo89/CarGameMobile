@@ -10,28 +10,37 @@ namespace Features.Inventory
 
     internal class InventoryController : BaseController, IInventoryController
     {
-
         private readonly IInventoryView _view;
         private readonly IInventoryModel _model;
         private readonly IItemsRepository _repository;
 
 
         public InventoryController(
-            [NotNull] IInventoryView view,
+            [NotNull] IInventoryView inventoryView,
             [NotNull] IInventoryModel inventoryModel,
-            [NotNull] IItemsRepository repository)
+            [NotNull] IItemsRepository itemsRepository)
         {
-            _model = inventoryModel ?? throw new ArgumentNullException(nameof(inventoryModel));
+            _view
+                = inventoryView ?? throw new ArgumentNullException(nameof(inventoryView));
 
-            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
+            _model
+                = inventoryModel ?? throw new ArgumentNullException(nameof(inventoryModel));
 
-            _view = view ?? throw new ArgumentNullException(nameof(view));
+            _repository
+                = itemsRepository ?? throw new ArgumentNullException(nameof(itemsRepository));
 
             _view.Display(_repository.Items.Values, OnItemClicked);
 
             foreach (string itemId in _model.EquippedItems)
                 _view.Select(itemId);
         }
+
+        protected override void OnDispose()
+        {
+            _view.Clear();
+            base.OnDispose();
+        }
+
 
         private void OnItemClicked(string itemId)
         {

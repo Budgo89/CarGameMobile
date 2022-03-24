@@ -11,10 +11,9 @@ namespace Game.Transport.Boat
         public override GameObject ViewGameObject => _view.gameObject;
 
 
-        public BoatController()
-        {
+        public BoatController(TransportModel model) : base(model) =>
             _view = LoadView();
-        }
+
 
         private BoatView LoadView()
         {
