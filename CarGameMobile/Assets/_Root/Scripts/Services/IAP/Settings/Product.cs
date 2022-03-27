@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System;
 using UnityEngine;
 using UnityEngine.Purchasing;
 
-namespace Services.IAP.Settings
+namespace Services.IAP
 {
     [Serializable]
     internal struct Product
