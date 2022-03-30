@@ -3,6 +3,7 @@ namespace Tween
     internal enum AnimationButtonType
     {
         ChangeRotation,
-        ChangePosition
+        ChangePosition,
+        PunchPosition
     }
 }

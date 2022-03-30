@@ -12,8 +12,6 @@ namespace Tween
         public static string CurveEaseName => nameof(_curveEase);
         public static string DurationName => nameof(_duration);
 
-        private Vector3 _transform;
-
         [SerializeField] private RectTransform _rectTransform;
 
         [SerializeField] private AnimationButtonType _animationButtonType = AnimationButtonType.ChangePosition;
@@ -21,12 +19,14 @@ namespace Tween
         [SerializeField] private float _duration = 0.6f;
         [SerializeField] private float _strength = 30f;
 
+        private Vector3 _direction;
+
 
         protected override void Awake()
         {
             base.Awake();
             InitRectTransform();
-            _transform = this.transform.position;
+            _direction = _rectTransform.position;
         }
 
         protected override void OnValidate()
@@ -37,7 +37,6 @@ namespace Tween
 
         private void InitRectTransform() =>
             _rectTransform ??= GetComponent<RectTransform>();
-
 
         public override void OnPointerClick(PointerEventData eventData)
         {
@@ -57,6 +56,10 @@ namespace Tween
                 case AnimationButtonType.ChangePosition:
                     _rectTransform.DOShakeAnchorPos(_duration, Vector2.one * _strength).SetEase(_curveEase);
                     break;
+                case AnimationButtonType.PunchPosition:
+                    _rectTransform.DOPunchPosition(_direction, 2, 2, 0.1f);
+                    break;
+
             }
         }
 

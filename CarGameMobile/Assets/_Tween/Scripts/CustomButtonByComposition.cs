@@ -18,6 +18,8 @@ namespace Tween
         [SerializeField] private float _duration = 0.6f;
         [SerializeField] private float _strength = 30f;
 
+        private Vector3 _direction;
+
 
         private void OnValidate() => InitComponents();
         private void Awake() => InitComponents();
@@ -29,6 +31,7 @@ namespace Tween
         {
             _button ??= GetComponent<Button>();
             _rectTransform ??= GetComponent<RectTransform>();
+            _direction = _rectTransform.position;
         }
 
 
@@ -47,6 +50,9 @@ namespace Tween
 
                 case AnimationButtonType.ChangePosition:
                     _rectTransform.DOShakeAnchorPos(_duration, Vector2.one * _strength).SetEase(_curveEase);
+                    break;
+                case AnimationButtonType.PunchPosition:
+                    _rectTransform.DOPunchPosition(_direction, 2, 2, 0.1f);
                     break;
             }
         }
