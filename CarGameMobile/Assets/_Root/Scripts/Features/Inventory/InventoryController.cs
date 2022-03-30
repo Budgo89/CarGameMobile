@@ -33,8 +33,6 @@ namespace Features.Inventory
 
             _view.Display(_repository.Items.Values, OnItemClicked);
 
-            //_buttonByComposition = new ButtonByComposition(inventoryView.GetRectTransform());
-
             foreach (string itemId in _model.EquippedItems)
                 _view.Select(itemId);
         }

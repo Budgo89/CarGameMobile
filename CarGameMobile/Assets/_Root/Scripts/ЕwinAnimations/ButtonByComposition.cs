@@ -1,7 +1,6 @@
-﻿
-using DG.Tweening;
+﻿using DG.Tweening;
+using Profile;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace ЕwinAnimations
 {
@@ -10,16 +9,20 @@ namespace ЕwinAnimations
 
         private RectTransform _rectTransform;
         
-        private AnimationButtonType _animationButtonType = AnimationButtonType.PunchPosition;
-        private float _elasticity = 0.01f;
-        private float _duration = 0.1f;
-        private int _vibrato = 1;
+        private readonly AnimationButtonType _animationButtonType;
+        private readonly float _elasticity;
+        private readonly float _duration;
+        private readonly int _vibrato;
 
-        private Vector3 _direction;
+        private readonly Vector3 _direction;
 
         internal ButtonByComposition(RectTransform rectTransform)
         {
             _rectTransform = rectTransform;
+            _animationButtonType = InventoryAnimationConfigurations.AnimationButtonType;
+            _elasticity = InventoryAnimationConfigurations.Elasticity;
+            _duration = InventoryAnimationConfigurations.Duration;
+            _vibrato = InventoryAnimationConfigurations.Vibrato;
             _direction = _rectTransform.position;
         }
 
