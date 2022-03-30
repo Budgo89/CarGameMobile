@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Services.Ads.Settings;
+using Services.Ads.UnityAds.Settings;
 using UnityEngine;
 
-namespace Services.Ads.Settings
+namespace Services.Ads.UnityAds
 {
     [CreateAssetMenu(fileName = nameof(UnityAdsSettings), menuName = "Settings/Ads/" + nameof(UnityAdsSettings))]
     internal class UnityAdsSettings : ScriptableObject

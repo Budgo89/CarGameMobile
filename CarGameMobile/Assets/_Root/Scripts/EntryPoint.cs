@@ -1,30 +1,37 @@
-using Assets._Root.Scripts.Services.Ads;
 using Profile;
-using Services.Analytics;
-using Services.IAP;
 using UnityEngine;
 
 internal class EntryPoint : MonoBehaviour
 {
-    private const float SpeedCar = 15f;
-    private const GameState InitialState = GameState.Start;
+    [Header("Initial Settings")]
+    [SerializeField] private InitialProfilePlayer _initialProfilePlayer;
+    [SerializeField] private InventoryAnimationConfigurations _inventoryAnimationConfigurations;
 
+    [Header("Scene Objects")]
     [SerializeField] private Transform _placeForUi;
-    [SerializeField] private AnalyticsManager _analytics;
-    [SerializeField] private UnityAdsTools _adsTools;
-    [SerializeField] private IAPService _iapService;
 
+    
     private MainController _mainController;
 
 
     private void Awake()
     {
-        var profilePlayer = new ProfilePlayer(SpeedCar, InitialState);
-        _mainController = new MainController(_placeForUi, profilePlayer, _analytics, _adsTools, _iapService);
+        var profilePlayer = CreateProfilePlayer(_initialProfilePlayer);
+        _mainController = new MainController(_placeForUi, profilePlayer, _inventoryAnimationConfigurations);
     }
 
     private void OnDestroy()
     {
         _mainController.Dispose();
     }
+
+
+    private ProfilePlayer CreateProfilePlayer(InitialProfilePlayer initialProfilePlayer) =>
+        new ProfilePlayer
+        (
+            initialProfilePlayer.Transport.Speed,
+            initialProfilePlayer.Transport.JumpHeight,
+            initialProfilePlayer.Transport.Type,
+            initialProfilePlayer.State
+        );
 }
