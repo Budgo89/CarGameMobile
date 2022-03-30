@@ -51,17 +51,10 @@ namespace Tween
             }
         }
 
-        //[ContextMenu(nameof(Play))]
-        //public void Play()
-        //{
-        //    transform.DOMoveX(4, 1).OnPlay(MyCallback);
-        //}
-
         [ContextMenu(nameof(Stop))]
         public void Stop()
         {
-            //_rectTransform.DOMoveX(_rectTransform, 0).OnKill();
-            //transform.DOMoveX(4, 1).OnKill(MyCallback);
+            _rectTransform.DOKill();
         }
     }
 }
