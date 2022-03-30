@@ -5,43 +5,27 @@ using UnityEngine.UI;
 
 namespace ЕwinAnimations
 {
-    [RequireComponent(typeof(Button))]
-    [RequireComponent(typeof(RectTransform))]
-    internal class ButtonByComposition : MonoBehaviour
+    internal class ButtonByComposition
     {
-        [Header("Components")]
-        [SerializeField] private Button _button;
-        [SerializeField] private RectTransform _rectTransform;
 
-        [Header("Settings")]
-        [SerializeField] private AnimationButtonType _animationButtonType = AnimationButtonType.PunchPosition;
-        [SerializeField] private float _elasticity = 0.1f;
-        [SerializeField] private float _duration = 2f;
-        [SerializeField] private int _vibrato = 2;
+        private RectTransform _rectTransform;
+        
+        private AnimationButtonType _animationButtonType = AnimationButtonType.PunchPosition;
+        private float _elasticity = 0.01f;
+        private float _duration = 0.1f;
+        private int _vibrato = 1;
 
         private Vector3 _direction;
 
-        private void OnValidate() => InitComponents();
-        private void Awake() => InitComponents();
-
-        private void Start() => _button.onClick.AddListener(OnButtonClick);
-        private void OnDestroy() => _button.onClick.RemoveAllListeners();
-
-        private void InitComponents()
+        internal ButtonByComposition(RectTransform rectTransform)
         {
-            _button ??= GetComponent<Button>();
-            _rectTransform ??= GetComponent<RectTransform>();
+            _rectTransform = rectTransform;
             _direction = _rectTransform.position;
         }
 
-
-        private void OnButtonClick() =>
-            ActivateAnimation();
-
-
-        [ContextMenu(nameof(ActivateAnimation))]
-        private void ActivateAnimation()
+        public void ActivateAnimation()
         {
+            
             switch (_animationButtonType)
             {
                 case AnimationButtonType.PunchPosition:

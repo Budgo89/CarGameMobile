@@ -11,15 +11,18 @@ namespace Features.Inventory
         void Clear();
         void Select(string id);
         void Unselect(string id);
+        RectTransform GetRectTransform();
+        ItemView GetItemView(string id);
     }
 
     internal class InventoryView : MonoBehaviour, IInventoryView
     {
         [SerializeField] private GameObject _itemViewPrefab;
         [SerializeField] private Transform _placeForItems;
+        [SerializeField] private RectTransform _rectTransform;
 
         private readonly Dictionary<string, ItemView> _itemViews = new Dictionary<string, ItemView>();
-
+        
 
         private void OnDestroy() => Clear();
 
@@ -66,6 +69,16 @@ namespace Features.Inventory
         {
             itemView.Deinit();
             Destroy(itemView.gameObject);
+        }
+
+        public RectTransform GetRectTransform()
+        {
+            return _rectTransform;
+        }
+
+        public ItemView GetItemView(string id)
+        {
+            return _itemViews[id];
         }
     }
 }
