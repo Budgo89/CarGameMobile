@@ -15,4 +15,4 @@ MonoBehaviour:
   AnimationButtonType: 0
   Elasticity: 0.01
   Duration: 0.1
-  Vibrato: 1
+  Vibrato: 2

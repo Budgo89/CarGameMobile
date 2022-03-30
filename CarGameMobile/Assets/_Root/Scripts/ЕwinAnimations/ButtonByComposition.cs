@@ -16,13 +16,13 @@ namespace ЕwinAnimations
 
         private readonly Vector3 _direction;
 
-        internal ButtonByComposition(RectTransform rectTransform)
+        internal ButtonByComposition(RectTransform rectTransform, InventoryAnimationConfigurations inventoryAnimationConfigurations)
         {
             _rectTransform = rectTransform;
-            _animationButtonType = InventoryAnimationConfigurations.AnimationButtonType;
-            _elasticity = InventoryAnimationConfigurations.Elasticity;
-            _duration = InventoryAnimationConfigurations.Duration;
-            _vibrato = InventoryAnimationConfigurations.Vibrato;
+            _animationButtonType = inventoryAnimationConfigurations.AnimationButtonType;
+            _elasticity = inventoryAnimationConfigurations.Elasticity;
+            _duration = inventoryAnimationConfigurations.Duration;
+            _vibrato = inventoryAnimationConfigurations.Vibrato;
             _direction = _rectTransform.position;
         }
 

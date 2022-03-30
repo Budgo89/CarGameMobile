@@ -1,6 +1,7 @@
 using System;
 using JetBrains.Annotations;
 using Features.Inventory.Items;
+using Profile;
 using UnityEngine;
 using ÅwinAnimations;
 
@@ -15,12 +16,14 @@ namespace Features.Inventory
         private readonly IInventoryView _view;
         private readonly IInventoryModel _model;
         private readonly IItemsRepository _repository;
+        private readonly InventoryAnimationConfigurations _inventoryAnimationConfigurations;
         private ButtonByComposition _buttonByComposition;
 
         public InventoryController(
             [NotNull] IInventoryView inventoryView,
             [NotNull] IInventoryModel inventoryModel,
-            [NotNull] IItemsRepository itemsRepository)
+            [NotNull] IItemsRepository itemsRepository,
+            [NotNull] InventoryAnimationConfigurations inventoryAnimationConfigurations)
         {
             _view
                 = inventoryView ?? throw new ArgumentNullException(nameof(inventoryView));
@@ -32,6 +35,9 @@ namespace Features.Inventory
                 = itemsRepository ?? throw new ArgumentNullException(nameof(itemsRepository));
 
             _view.Display(_repository.Items.Values, OnItemClicked);
+
+            _inventoryAnimationConfigurations
+                = inventoryAnimationConfigurations ?? throw new ArgumentNullException(nameof(inventoryAnimationConfigurations));
 
             foreach (string itemId in _model.EquippedItems)
                 _view.Select(itemId);
@@ -71,7 +77,7 @@ namespace Features.Inventory
         private void Plays(string itemId)
         {
             var itemView = _view.GetItemView(itemId);
-            _buttonByComposition = new ButtonByComposition(itemView.GetComponent<RectTransform>());
+            _buttonByComposition = new ButtonByComposition(itemView.GetComponent<RectTransform>(), _inventoryAnimationConfigurations);
             _buttonByComposition.ActivateAnimation();
         }
     }

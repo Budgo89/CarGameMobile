@@ -18,6 +18,7 @@ internal class MainController : BaseController
 
     private readonly List<GameObject> _subObjects = new List<GameObject>();
     private readonly List<IDisposable> _subDisposables = new List<IDisposable>();
+    private readonly InventoryAnimationConfigurations _inventoryAnimationConfigurations;
 
     private MainMenuController _mainMenuController;
     private SettingsMenuController _settingsMenuController;
@@ -25,10 +26,11 @@ internal class MainController : BaseController
     private GameController _gameController;
 
 
-    public MainController(Transform placeForUi, ProfilePlayer profilePlayer)
+    public MainController(Transform placeForUi, ProfilePlayer profilePlayer, InventoryAnimationConfigurations inventoryAnimationConfigurations)
     {
         _placeForUi = placeForUi;
         _profilePlayer = profilePlayer;
+        _inventoryAnimationConfigurations = inventoryAnimationConfigurations;
 
         profilePlayer.CurrentState.SubscribeOnChange(OnChangeGameState);
         OnChangeGameState(_profilePlayer.CurrentState.Value);
@@ -138,7 +140,7 @@ internal class MainController : BaseController
         IInventoryModel inventoryModel = _profilePlayer.Inventory;
         IItemsRepository itemsRepository = CreateItemsRepository();
 
-        var inventoryController = new InventoryController(inventoryView, inventoryModel, itemsRepository);
+        var inventoryController = new InventoryController(inventoryView, inventoryModel, itemsRepository, _inventoryAnimationConfigurations);
         _subDisposables.Add(inventoryController);
 
         return inventoryController;
