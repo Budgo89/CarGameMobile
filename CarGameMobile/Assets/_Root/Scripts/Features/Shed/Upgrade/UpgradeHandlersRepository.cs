@@ -1,27 +1,3 @@
-using System.Collections.Generic;
-
-namespace Features.Shed.Upgrade
-{
-    internal interface IUpgradeHandlersRepository : IRepository
-    {
-        IReadOnlyDictionary<string, IUpgradeHandler> Items { get; }
-    }
-
-    internal class UpgradeHandlersRepository
-        : Repository<string, IUpgradeHandler, UpgradeItemConfig>, IUpgradeHandlersRepository
-    {
-        public UpgradeHandlersRepository(IEnumerable<UpgradeItemConfig> configs) : base(configs)
-        { }
-
-        protected override string GetKey(UpgradeItemConfig config) =>
-            config.Id;
-
-        protected override IUpgradeHandler CreateItem(UpgradeItemConfig config) =>
-            config.Type switch
-            {
-                UpgradeType.Speed => new SpeedUpgradeHandler(config.Value),
-                UpgradeType.JumpHeight => new JumpHeightUpgradeHandler(config.Value),
-                _ => StubUpgradeHandler.Default
-            };
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:19619114059debddd882c800991c557650bb692d5da6b0d1970968ffa04c489c
+size 923

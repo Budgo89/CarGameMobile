@@ -1,16 +1,3 @@
-using UnityEngine;
-
-namespace Tool
-{
-    internal static class ResourcesLoader
-    {
-        public static Sprite LoadSprite(ResourcePath path) =>
-            LoadObject<Sprite>(path);
-
-        public static GameObject LoadPrefab(ResourcePath path) =>
-            LoadObject<GameObject>(path);
-
-        public static TObject LoadObject<TObject>(ResourcePath path) where TObject : Object =>
-            Resources.Load<TObject >(path.PathResource);
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:d66d21adf673e0fa842c2bd9dc96ad99854779f9eef032003af0446fbeb1c61b
+size 455

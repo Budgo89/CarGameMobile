@@ -1,21 +1,3 @@
-using UnityEngine;
-
-namespace Game.InputLogic
-{
-    internal class InputKeyboard : BaseInputView
-    {
-        [SerializeField] private float _inputMultiplier = 0.01f;
-
-
-        protected override void Move()
-        {
-            float moveValue = _speed * _inputMultiplier * Time.deltaTime;
-
-            if (Input.GetKey(KeyCode.LeftArrow))
-                OnLeftMove(moveValue);
-
-            if (Input.GetKey(KeyCode.RightArrow))
-                OnRightMove(moveValue);
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:6c55cc78acf3a1a894643481dd8ef51b5bae745d814d6f7033bd1ae10daeb2a6
+size 491

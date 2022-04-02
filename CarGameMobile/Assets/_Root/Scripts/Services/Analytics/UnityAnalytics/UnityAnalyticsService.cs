@@ -1,16 +1,3 @@
-using System.Collections.Generic;
-
-namespace Services.Analytics.UnityAnalytics
-{
-    internal class UnityAnalyticsService : IAnalyticsService
-    {
-        public void SendEvent(string eventName) =>
-            UnityEngine.Analytics.Analytics.CustomEvent(eventName);
-
-        public void SendEvent(string eventName, Dictionary<string, object> eventData) =>
-            UnityEngine.Analytics.Analytics.CustomEvent(eventName, eventData);
-
-        public void SendTransaction(string productId, decimal amount, string currency) =>
-            UnityEngine.Analytics.Analytics.Transaction(productId, amount, currency);
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:1896fa3d4e6084784f7a489b2c595e97bb50b236077c3768fa954bee42758f38
+size 621

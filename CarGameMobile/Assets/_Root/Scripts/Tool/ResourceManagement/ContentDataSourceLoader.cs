@@ -1,29 +1,3 @@
-using System;
-using System.Linq;
-using Features.Shed.Upgrade;
-using Features.Inventory.Items;
-using Features.AbilitySystem.Abilities;
-
-namespace Tool
-{
-    internal class ContentDataSourceLoader
-    {
-        public static ItemConfig[] LoadItemConfigs(ResourcePath resourcePath)
-        {
-            var dataSource = ResourcesLoader.LoadObject<ItemConfigDataSource>(resourcePath);
-            return dataSource == null ? Array.Empty<ItemConfig>() : dataSource.ItemConfigs.ToArray();
-        }
-
-        public static UpgradeItemConfig[] LoadUpgradeItemConfigs(ResourcePath resourcePath)
-        {
-            var dataSource = ResourcesLoader.LoadObject<UpgradeItemConfigDataSource>(resourcePath);
-            return dataSource == null ? Array.Empty<UpgradeItemConfig>() : dataSource.ItemConfigs.ToArray();
-        }
-
-        public static AbilityItemConfig[] LoadAbilityItemConfigs(ResourcePath resourcePath)
-        {
-            var dataSource = ResourcesLoader.LoadObject<AbilityItemConfigDataSource>(resourcePath);
-            return dataSource == null ? Array.Empty<AbilityItemConfig>() : dataSource.AbilityConfigs.ToArray();
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:874500c8472bbf6c07e4cb9605b4797e75f4b702475ce0885d7e2dc8ebb41ec3
+size 1149

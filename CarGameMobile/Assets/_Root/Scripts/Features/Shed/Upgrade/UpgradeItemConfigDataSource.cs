@@ -1,15 +1,3 @@
-using UnityEngine;
-using System.Collections.Generic;
-
-namespace Features.Shed.Upgrade
-{
-    [CreateAssetMenu(
-        fileName = nameof(UpgradeItemConfigDataSource),
-        menuName = "Configs/" + nameof(UpgradeItemConfigDataSource))]
-    internal class UpgradeItemConfigDataSource : ScriptableObject
-    {
-        [SerializeField] private UpgradeItemConfig[] _itemConfigs;
-
-        public IReadOnlyList<UpgradeItemConfig> ItemConfigs => _itemConfigs;
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:829d337fc64733ec282b8731cb0b37552b6f905b8f960f6760b03313538ebede
+size 461

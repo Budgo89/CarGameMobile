@@ -1,12 +1,3 @@
-using UnityEngine;
-
-namespace Features.Inventory.Items
-{
-    [CreateAssetMenu(fileName = nameof(ItemConfig), menuName = "Configs/" + nameof(ItemConfig))]
-    internal class ItemConfig : ScriptableObject
-    {
-        [field: SerializeField] public string Id { get; private set; }
-        [field: SerializeField] public string Title { get; private set; }
-        [field: SerializeField] public Sprite Icon { get; private set; }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:42e54cbb18b6fa9e51969f2e3add06e0fba385ad0f0d2ebe8571ead962056f7e
+size 435

@@ -1,32 +1,3 @@
-using Features.Shed.Upgrade;
-
-namespace Game.Transport
-{
-    internal class TransportModel : IUpgradable
-    {
-        private readonly float _defaultSpeed;
-        private readonly float _defaultJumpHeight;
-
-        public readonly TransportType Type;
-
-        public float Speed { get; set; }
-        public float JumpHeight { get; set; }
-
-
-        public TransportModel(float speed, float jumpHeight, TransportType type)
-        {
-            _defaultSpeed = speed;
-            _defaultJumpHeight = jumpHeight;
-
-            Speed = speed;
-            JumpHeight = jumpHeight;
-            Type = type;
-        }
-
-        public void Restore()
-        {
-            Speed = _defaultSpeed;
-            JumpHeight = _defaultJumpHeight;
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:c901c2acdde36892adc8421a3b4002b406e0ce8b6717a05a00dc358a0d5891a5
+size 753

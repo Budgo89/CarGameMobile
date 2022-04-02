@@ -1,34 +1,3 @@
-using System;
-using System.Collections.Generic;
-
-internal interface IRepository : IDisposable
-{
-
-}
-
-internal abstract class Repository<TKey, TValue, TConfig> : IRepository
-{
-    private readonly Dictionary<TKey, TValue> _items;
-    public IReadOnlyDictionary<TKey, TValue> Items => _items;
-
-
-    protected Repository(IEnumerable<TConfig> configs) =>
-        _items = CreteItems(configs);
-
-    public void Dispose() =>
-        _items.Clear();
-
-
-    private Dictionary<TKey, TValue> CreteItems(IEnumerable<TConfig> configs)
-    {
-        var items = new Dictionary<TKey, TValue>();
-
-        foreach (TConfig config in configs)
-            items[GetKey(config)] = CreateItem(config);
-
-        return items;
-    }
-
-    protected abstract TKey GetKey(TConfig config);
-    protected abstract TValue CreateItem(TConfig config);
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:c1958ab62dcfbac51fb4d1de88deec9532040b2f7dd8163917883ddd921e9f73
+size 823

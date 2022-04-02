@@ -1,34 +1,3 @@
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.Events;
-
-namespace Features.AbilitySystem.Abilities
-{
-    interface IAbilityButtonView
-    {
-        void Init(Sprite icon, UnityAction click);
-        void Deinit();
-    }
-
-    internal class AbilityButtonView : MonoBehaviour
-    {
-        [SerializeField] private Image _icon;
-        [SerializeField] private Button _button;
-
-
-        private void OnDestroy() => Deinit();
-
-
-        public void Init(Sprite icon, UnityAction click)
-        {
-            _icon.sprite = icon;
-            _button.onClick.AddListener(click);
-        }
-
-        public void Deinit()
-        {
-            _icon.sprite = null;
-            _button.onClick.RemoveAllListeners();
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:5e74e67e492876c2309bfe30d03acd4a4d6dcc9d557d8ae2edbc3c085298dc71
+size 736

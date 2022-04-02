@@ -1,15 +1,3 @@
-using UnityEngine;
-using Features.Inventory.Items;
-
-namespace Features.Shed.Upgrade
-{
-    [CreateAssetMenu(fileName = nameof(UpgradeItemConfig), menuName = "Configs/" + nameof(UpgradeItemConfig))]
-    internal class UpgradeItemConfig : ScriptableObject
-    {
-        [SerializeField] private ItemConfig _itemConfig;
-        [field: SerializeField] public UpgradeType Type { get; private set; }
-        [field: SerializeField] public float Value { get; private set; }
-
-        public string Id => _itemConfig.Id;
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:f5ffaac829f69c7f2c1f1f91f46a025af5b73dc9fec2730cd140e6a88d3bfccf
+size 520

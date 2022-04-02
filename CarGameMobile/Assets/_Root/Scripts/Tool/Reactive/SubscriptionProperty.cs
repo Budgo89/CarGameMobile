@@ -1,31 +1,3 @@
-using System;
-
-namespace Tool
-{
-    internal class SubscriptionProperty<TValue> : ISubscriptionProperty<TValue>
-    {
-        private TValue _value;
-        private Action<TValue> _onChangeValue;
-
-        public TValue Value
-        {
-            get => _value;
-            set
-            {
-                _value = value;
-                _onChangeValue?.Invoke(_value);
-            }
-        }
-
-
-        public SubscriptionProperty() {}
-        public SubscriptionProperty(TValue value) => _value = value;
-
-
-        public void SubscribeOnChange(Action<TValue> subscriptionAction) =>
-            _onChangeValue += subscriptionAction;
-
-        public void UnSubscribeOnChange(Action<TValue> unsubscriptionAction) =>
-            _onChangeValue -= unsubscriptionAction;
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:5c21bfbc803b53c73a432e49cf3198419cdd8e495f7affa13b4608491df269d2
+size 777

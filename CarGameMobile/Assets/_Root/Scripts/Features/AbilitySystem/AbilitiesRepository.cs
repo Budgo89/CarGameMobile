@@ -1,26 +1,3 @@
-using System.Collections.Generic;
-using Features.AbilitySystem.Abilities;
-
-namespace Features.AbilitySystem
-{
-    internal interface IAbilitiesRepository : IRepository
-    {
-        IReadOnlyDictionary<string, IAbility> Items { get; }
-    }
-
-    internal class AbilitiesRepository : Repository<string, IAbility, IAbilityItem>, IAbilitiesRepository
-    {
-        public AbilitiesRepository(IEnumerable<IAbilityItem> abilityItems) : base(abilityItems)
-        { }
-
-        protected override string GetKey(IAbilityItem abilityItem) => abilityItem.Id;
-
-        protected override IAbility CreateItem(IAbilityItem abilityItem) =>
-            abilityItem.Type switch
-            {
-                AbilityType.Gun => new GunAbility(abilityItem),
-                AbilityType.Jump => new JumpAbility(abilityItem),
-                _ => StubAbility.Default
-            };
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:d260f28ef573b94a1e601ff19ce49f65848c1f4cb818f6a37262d8634988d08a
+size 870

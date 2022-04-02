@@ -1,26 +1,3 @@
-using System.IO;
-using System.Runtime.CompilerServices;
-
-[assembly: InternalsVisibleTo("Unity.VSCode.EditorTests")]
-
-namespace VSCodeEditor.Tests
-{
-    internal static class StringUtils
-    {
-        private const char WinSeparator = '\\';
-        private const char UnixSeparator = '/';
-
-        public static string NormalizePath(this string path)
-        {
-            if (string.IsNullOrEmpty(path))
-                return path;
-
-            if (Path.DirectorySeparatorChar == WinSeparator)
-                path = path.Replace(UnixSeparator, WinSeparator);
-            if (Path.DirectorySeparatorChar == UnixSeparator)
-                path = path.Replace(WinSeparator, UnixSeparator);
-
-            return path.Replace(string.Concat(WinSeparator, WinSeparator), WinSeparator.ToString());
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:395abe79653c65149fa2c11821de3aae44afb5bddf4034372b2c2fb31f8dcbbb
+size 808

@@ -1,22 +1,3 @@
-using Tool;
-using Game;
-using Game.Transport;
-using Features.Inventory;
-
-namespace Profile
-{
-    internal class ProfilePlayer
-    {
-        public readonly SubscriptionProperty<GameState> CurrentState;
-        public readonly TransportModel CurrentTransport;
-        public readonly InventoryModel Inventory;
-
-
-        public ProfilePlayer(float transportSpeed, float transportJumpHeight, TransportType transportType, GameState initialState)
-        {
-            CurrentState = new SubscriptionProperty<GameState>(initialState);
-            CurrentTransport = new TransportModel(transportSpeed, transportJumpHeight, transportType);
-            Inventory = new InventoryModel();
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:9c672fa423c36d08ce11a4a577d4a3e4f741984210548fb9561670146e7d89d3
+size 697

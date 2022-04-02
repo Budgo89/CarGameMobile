@@ -1,27 +1,3 @@
-using Tool;
-using UnityEngine;
-
-namespace Game.Transport.Boat
-{
-    internal class BoatController : TransportController
-    {
-        private readonly ResourcePath _viewPath = new ResourcePath("Prefabs/Transport/Boat");
-        private readonly BoatView _view;
-
-        public override GameObject ViewGameObject => _view.gameObject;
-
-
-        public BoatController(TransportModel model) : base(model) =>
-            _view = LoadView();
-
-
-        private BoatView LoadView()
-        {
-            GameObject prefab = ResourcesLoader.LoadPrefab(_viewPath);
-            GameObject objectView = Object.Instantiate(prefab);
-            AddGameObject(objectView);
-
-            return objectView.GetComponent<BoatView>();
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:a43379d25aedf4bf2852feac2c222e8ad636598cf7adf3d70e9ef49387e0804e
+size 733
