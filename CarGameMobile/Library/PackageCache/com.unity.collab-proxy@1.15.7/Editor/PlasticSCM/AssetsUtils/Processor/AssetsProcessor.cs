@@ -1,26 +1,3 @@
-﻿using PlasticGui;
-
-using Unity.PlasticSCM.Editor.AssetsOverlays.Cache;
-
-namespace Unity.PlasticSCM.Editor.AssetUtils.Processor
-{
-    internal static class AssetsProcessors
-    {
-        internal static void Enable(
-            IPlasticAPI plasticApi,
-            IAssetStatusCache assetStatusCache)
-        {
-            PlasticAssetsProcessor.RegisterPlasticAPI(plasticApi);
-            AssetModificationProcessor.RegisterAssetStatusCache(assetStatusCache);
-
-            AssetPostprocessor.IsEnabled = true;
-            AssetModificationProcessor.IsEnabled = true;
-        }
-
-        internal static void Disable()
-        {
-            AssetPostprocessor.IsEnabled = false;
-            AssetModificationProcessor.IsEnabled = false;
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:e05a4212f6bef1e41764d588b62ef5774e99b15adeb9bca3206e5549d4072fbd
+size 755

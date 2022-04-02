@@ -1,31 +1,3 @@
-﻿/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
-
-using System.Runtime.CompilerServices;
-using UnityEditor;
-using UnityEngine;
-
-namespace Microsoft.Unity.VisualStudio.Editor
-{
-	internal static class SessionSettings
-	{
-		internal static string GetKey([CallerMemberName] string memberName = "")
-		{
-			return $"{typeof(SessionSettings).FullName}.{memberName}";
-		}
-
-		public static bool PackageVersionChecked
-		{
-			get
-			{
-				return SessionState.GetBool(GetKey(), false);
-			}
-			set
-			{
-				SessionState.SetBool(GetKey(), value);
-			}
-		}
-	}
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:c7ca1c47c70bb26f40185825e28e44b8cbb8440879acc728c92027a72b473695
+size 853

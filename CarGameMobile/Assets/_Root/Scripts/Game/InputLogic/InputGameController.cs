@@ -1,32 +1,3 @@
-using Game.Car;
-using Tool;
-using UnityEngine;
-
-namespace Game.InputLogic
-{
-    internal class InputGameController : BaseController
-    {
-        private readonly ResourcePath _resourcePath = new ResourcePath("Prefabs/EndlessMove");
-        private BaseInputView _view;
-
-
-        public InputGameController(
-            SubscriptionProperty<float> leftMove,
-            SubscriptionProperty<float> rightMove,
-            CarModel car)
-        {
-            _view = LoadView();
-            _view.Init(leftMove, rightMove, car.Speed);
-        }
-
-        private BaseInputView LoadView()
-        {
-            GameObject prefab = ResourcesLoader.LoadPrefab(_resourcePath);
-            GameObject objectView = Object.Instantiate(prefab);
-            AddGameObject(objectView);
-
-            BaseInputView view = objectView.GetComponent<BaseInputView>();
-            return view;
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:544c4c51e0dfd13a15940da2f58a7cf0043e0a385b480141ede611a89d769a59
+size 933

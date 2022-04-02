@@ -1,18 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine.Events;
-
-namespace Services.Ads
-{
-    internal class IAdsService
-    {
-        IAdsPlayer InterstitialPlayer { get; }
-        IAdsPlayer RewardedPlayer { get; }
-        IAdsPlayer BannerPlayer { get; }
-        UnityEvent Initialized { get; }
-        bool IsInitialized { get; }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:954c8d0813b0f9cee343b812996d05e12a3636282dbb98a594ba0fb2687712e9
+size 308

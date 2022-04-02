@@ -1,29 +1,3 @@
-using Tool;
-using UnityEngine;
-
-namespace Game.InputLogic
-{
-    internal abstract class BaseInputView : MonoBehaviour
-    {
-        private SubscriptionProperty<float> _leftMove;
-        private SubscriptionProperty<float> _rightMove;
-        protected float _speed;
-
-
-        public virtual void Init(
-            SubscriptionProperty<float> leftMove,
-            SubscriptionProperty<float> rightMove,
-            float speed)
-        {
-            _leftMove = leftMove;
-            _rightMove = rightMove;
-            _speed = speed;
-        }
-
-        protected virtual void OnLeftMove(float value) =>
-            _leftMove.Value = value;
-
-        protected virtual void OnRightMove(float value) =>
-            _rightMove.Value = value;
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:7cd1fe235e45cbd4b2f38a3d03a549f2aef2be684dea8e504445f87550552c1a
+size 993

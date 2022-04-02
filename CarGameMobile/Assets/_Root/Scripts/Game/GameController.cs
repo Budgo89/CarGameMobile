@@ -1,27 +1,3 @@
-using Game.Car;
-using Game.InputLogic;
-using Game.TapeBackground;
-using Profile;
-using Tool;
-
-namespace Game
-{
-    internal class GameController : BaseController
-    {
-        public GameController(ProfilePlayer profilePlayer)
-        {
-            var leftMoveDiff = new SubscriptionProperty<float>();
-            var rightMoveDiff = new SubscriptionProperty<float>();
-
-            var tapeBackgroundController = new TapeBackgroundController(leftMoveDiff, rightMoveDiff);
-            AddController(tapeBackgroundController);
-
-            var inputGameController = new InputGameController(leftMoveDiff, rightMoveDiff, profilePlayer.CurrentCar);
-            AddController(inputGameController);
-
-            var carController = new CarController();
-            AddController(carController);
-            
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:c150e9cfb09eb56b302d2cbf04ddc9ddf409094b68e98a8f146711b1a4cf95a1
+size 4138
