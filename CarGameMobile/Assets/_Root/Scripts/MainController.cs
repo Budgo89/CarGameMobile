@@ -5,6 +5,8 @@ using Profile;
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using Features.Fight;
+using Features.Rewards;
 using Features.Shed;
 using Features.Shed.Upgrade;
 using Features.Inventory;
@@ -18,19 +20,20 @@ internal class MainController : BaseController
 
     private readonly List<GameObject> _subObjects = new List<GameObject>();
     private readonly List<IDisposable> _subDisposables = new List<IDisposable>();
-    private readonly InventoryAnimationConfigurations _inventoryAnimationConfigurations;
 
     private MainMenuController _mainMenuController;
     private SettingsMenuController _settingsMenuController;
     private ShedController _shedController;
+    private RewardController _rewardController;
+    private StartFightController _startFightController;
     private GameController _gameController;
+    private FightController _fightController;
 
 
-    public MainController(Transform placeForUi, ProfilePlayer profilePlayer, InventoryAnimationConfigurations inventoryAnimationConfigurations)
+    public MainController(Transform placeForUi, ProfilePlayer profilePlayer)
     {
         _placeForUi = placeForUi;
         _profilePlayer = profilePlayer;
-        _inventoryAnimationConfigurations = inventoryAnimationConfigurations;
 
         profilePlayer.CurrentState.SubscribeOnChange(OnChangeGameState);
         OnChangeGameState(_profilePlayer.CurrentState.Value);
@@ -60,8 +63,15 @@ internal class MainController : BaseController
             case GameState.Shed:
                 _shedController = CreateShedController(_placeForUi);
                 break;
+            case GameState.DailyReward:
+                _rewardController = new RewardController(_placeForUi, _profilePlayer);
+                break;
             case GameState.Game:
                 _gameController = new GameController(_placeForUi, _profilePlayer);
+                _startFightController = new StartFightController(_placeForUi, _profilePlayer);
+                break;
+            case GameState.Fight:
+                _fightController = new FightController(_placeForUi, _profilePlayer);
                 break;
         }
     }
@@ -71,7 +81,10 @@ internal class MainController : BaseController
         _mainMenuController?.Dispose();
         _settingsMenuController?.Dispose();
         _shedController?.Dispose();
+        _rewardController?.Dispose();
+        _startFightController?.Dispose();
         _gameController?.Dispose();
+        _fightController?.Dispose();
     }
 
     private void DisposeSubInstances()
@@ -140,7 +153,7 @@ internal class MainController : BaseController
         IInventoryModel inventoryModel = _profilePlayer.Inventory;
         IItemsRepository itemsRepository = CreateItemsRepository();
 
-        var inventoryController = new InventoryController(inventoryView, inventoryModel, itemsRepository, _inventoryAnimationConfigurations);
+        var inventoryController = new InventoryController(inventoryView, inventoryModel, itemsRepository);
         _subDisposables.Add(inventoryController);
 
         return inventoryController;

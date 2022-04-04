@@ -626,5 +626,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _initialProfilePlayer: {fileID: 11400000, guid: 61a8abf8ae96b4ccf807ced955201581, type: 2}
-  _inventoryAnimationConfigurations: {fileID: 11400000, guid: 4550a8fc4c91a8b47b0fbc80402d4229, type: 2}
   _placeForUi: {fileID: 1903552}

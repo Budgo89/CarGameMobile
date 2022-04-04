@@ -5,19 +5,17 @@ internal class EntryPoint : MonoBehaviour
 {
     [Header("Initial Settings")]
     [SerializeField] private InitialProfilePlayer _initialProfilePlayer;
-    [SerializeField] private InventoryAnimationConfigurations _inventoryAnimationConfigurations;
 
     [Header("Scene Objects")]
     [SerializeField] private Transform _placeForUi;
 
-    
     private MainController _mainController;
 
 
     private void Awake()
     {
         var profilePlayer = CreateProfilePlayer(_initialProfilePlayer);
-        _mainController = new MainController(_placeForUi, profilePlayer, _inventoryAnimationConfigurations);
+        _mainController = new MainController(_placeForUi, profilePlayer);
     }
 
     private void OnDestroy()

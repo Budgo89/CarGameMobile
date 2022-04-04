@@ -17,7 +17,7 @@ namespace Ui
         {
             _profilePlayer = profilePlayer;
             _view = LoadView(placeForUi);
-            _view.Init(StartGame, Settings, Shed, Reward, Buy);
+            _view.Init(StartGame, Settings, Shed, Reward, Buy, DailyReward, ExitGame);
 
             SubscribeAds();
             SubscribeIAP();
@@ -52,6 +52,17 @@ namespace Ui
 
         private void Buy(string productId) =>
             ServiceLocator.IAPService.Buy(productId);
+
+        private void DailyReward() =>
+            _profilePlayer.CurrentState.Value = GameState.DailyReward;
+
+        private void ExitGame()
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#endif
+            Application.Quit();
+        }
 
         private void SubscribeAds()
         {
