@@ -39,7 +39,7 @@ namespace Features.Rewards
             get
             {
                 string data = PlayerPrefs.GetString(TimeGetRewardKey);
-                return !string.IsNullOrEmpty(data) ? DateTime.Parse(data) : null;
+                return !string.IsNullOrEmpty(data) ? DateTime.Parse(data) : (DateTime?) null;
             }
             set
             {

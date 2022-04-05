@@ -11,6 +11,7 @@ using Game.Transport.Boat;
 using Game.Transport.Car;
 using Features.AbilitySystem;
 using Features.AbilitySystem.Abilities;
+using Features.ReturnToMenu;
 
 namespace Game
 {
@@ -24,6 +25,7 @@ namespace Game
         private readonly InputGameController _inputGameController;
         private readonly TransportController _transportController;
         private readonly IAbilitiesController _abilitiesController;
+        private readonly ButtonController _buttonController;
 
 
         public GameController(Transform placeForUi, ProfilePlayer profilePlayer)
@@ -36,10 +38,16 @@ namespace Game
             _inputGameController = CreateInputGameController();
             _transportController = CreateTransportController(profilePlayer.CurrentTransport);
             _abilitiesController = CreateAbilitiesController(placeForUi);
-
+            _buttonController = CreateButtonController(placeForUi, profilePlayer);
             ServiceLocator.Analytics.SendGameStarted();
         }
 
+        private ButtonController CreateButtonController(Transform placeForUi, ProfilePlayer profilePlayer)
+        {
+            var buttonController = new ButtonController(placeForUi, profilePlayer);
+            AddController(buttonController);
+            return buttonController;
+        }
 
         private TapeBackgroundController CreateTapeBackground()
         {
