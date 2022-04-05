@@ -1,8 +1,6 @@
-﻿using Services.IAP.Settings;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Purchasing;
-using Product = Services.IAP.Settings.Product;
 
 namespace Services.IAP
 {
@@ -68,7 +66,7 @@ namespace Services.IAP
         public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs args)
         {
             if (_purchaseValidator.Validate(args))
-                PurchaseSucceed.Invoke();
+                OnPurchaseSucceed(args.purchasedProduct);
             else
                 OnPurchaseFailed(args.purchasedProduct.definition.id, "NonValid");
 
@@ -84,6 +82,16 @@ namespace Services.IAP
             PurchaseFailed?.Invoke();
         }
 
+        private void OnPurchaseSucceed(UnityEngine.Purchasing.Product product)
+        {
+            string productId = product.definition.id;
+            decimal amount = (decimal)product.definition.payout.quantity;
+            string currency = product.metadata.isoCurrencyCode;
+            ServiceLocator.Analytics.SendTransaction(productId, amount, currency);
+
+            Log($"Purchased: {productId}");
+            PurchaseSucceed?.Invoke();
+        }
 
         public string GetCost(string productID)
         {
