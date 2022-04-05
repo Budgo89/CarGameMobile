@@ -9,7 +9,7 @@ namespace Features.ReturnToMenu
 {
     internal class ButtonController : BaseController
     {
-        private readonly ResourcePath _resourcePath = new ResourcePath("Prefabs/Fight/ReturnToMenuView");
+        private readonly ResourcePath _resourcePath = new ResourcePath("Prefabs/Button/ReturnToMenuView");
 
         private readonly ReturnToMenuView _view;
         private readonly ProfilePlayer _profilePlayer;
