@@ -9,9 +9,9 @@ namespace Features.ReturnToMenu
 {
     internal class ButtonController : BaseController
     {
-        private readonly ResourcePath _resourcePath = new ResourcePath("Prefabs/Button/ReturnToMenuView");
+        private readonly ResourcePath _resourcePath = new ResourcePath("Prefabs/Button/ButtonView");
 
-        private readonly ReturnToMenuView _view;
+        private readonly ButtonView _view;
         private readonly ProfilePlayer _profilePlayer;
 
 
@@ -19,20 +19,23 @@ namespace Features.ReturnToMenu
         {
             _profilePlayer = profilePlayer;
             _view = LoadView(placeForUi);
-            _view.Init(Return);
+            _view.Init(Return, Pause);
         }
         
 
-        private ReturnToMenuView LoadView(Transform placeForUi)
+        private ButtonView LoadView(Transform placeForUi)
         {
             GameObject prefab = ResourcesLoader.LoadPrefab(_resourcePath);
             GameObject objectView = Object.Instantiate(prefab, placeForUi, false);
             AddGameObject(objectView);
 
-            return objectView.GetComponent<ReturnToMenuView>();
+            return objectView.GetComponent<ButtonView>();
         }
 
         private void Return() =>
             _profilePlayer.CurrentState.Value = GameState.Start;
+
+        public void Pause() =>
+            _profilePlayer.CurrentState.Value = GameState.Pause;
     }
 }
