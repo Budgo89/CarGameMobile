@@ -8,7 +8,6 @@ namespace Profile
         Shed,
         DailyReward,
         Game,
-        Fight,
-        Pause
+        Fight
     }
 }
