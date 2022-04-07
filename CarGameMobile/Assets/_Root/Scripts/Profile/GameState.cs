@@ -4,7 +4,10 @@ namespace Profile
     {
         None,
         Start,
+        Settings,
+        Shed,
+        DailyReward,
         Game,
-        Settings
+        Fight
     }
 }

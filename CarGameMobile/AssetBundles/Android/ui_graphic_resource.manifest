@@ -1,0 +1,21 @@
+ManifestFileVersion: 0
+CRC: 320064071
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 047a9aa8f3dd9dd52d37f3ae95c2dcf6
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 4df8c69f2c8a6ad9e3cbf82bb83e4dc3
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/_Root/Sprites/Rewards/UI_Graphic_Resource_Gems.png
+- Assets/_Root/Sprites/Rewards/UI_Graphic_Resource_Food.png
+- Assets/_Root/Sprites/Rewards/UI_Graphic_Resource_Coins.png
+Dependencies: []
