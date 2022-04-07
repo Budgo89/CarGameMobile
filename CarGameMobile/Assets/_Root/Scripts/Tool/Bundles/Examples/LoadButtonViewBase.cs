@@ -7,7 +7,8 @@ namespace Tool.Bundles.Examples
     internal class LoadButtonViewBase : MonoBehaviour
     {
         //private const string UrlAssetBundleSprites = "https://drive.google.com/uc?export=download&id=1rQzWdcChHhJJBTe4rf1D0Kwi1a43jxWR";
-        private const string UrlAssetBundleSprites = "https://drive.google.com/uc?export=download&id=15CiRd0LP1X65iidPEUtFXQHFBqX3-8-B";
+        private const string UrlAssetBundleSprites = "https://drive.google.com/uc?export=download&id=1qMERD-lQnIZWm5J-tKxqfGAO_9TAx85s";
+
         [SerializeField] private DataSpriteBundle _dataSpriteBundles;
 
         private AssetBundle _spritesAssetBundle;
