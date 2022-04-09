@@ -192,6 +192,8 @@
     <Compile Include="Assets\_Root\Scripts\Tool\PushNotifications\StubNotificationScheduler.cs" />
     <Compile Include="Assets\_Root\Scripts\Tool\PushNotifications\Settings\NotificationSettings.cs" />
     <Compile Include="Assets\_Root\Scripts\Tool\PushNotifications\Examples\NotificationWindow.cs" />
+    <Compile Include="Assets\_Root\Scripts\Ui\LanguageMenu\LanguageMenuView.cs" />
+    <Compile Include="Assets\_Root\Scripts\Ui\LanguageMenu\LanguageMenuController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

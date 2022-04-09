@@ -8,6 +8,7 @@ namespace Profile
         Shed,
         DailyReward,
         Game,
-        Fight
+        Fight,
+        Language
     }
 }

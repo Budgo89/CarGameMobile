@@ -16,9 +16,8 @@ namespace Ui
         {
             _profilePlayer = profilePlayer;
             _view = LoadView(placeForUi);
-            _view.Init(Back);
+            _view.Init(Back, Language);
         }
-
 
         private SettingsMenuView LoadView(Transform placeForUi)
         {
@@ -31,5 +30,10 @@ namespace Ui
 
         private void Back() =>
             _profilePlayer.CurrentState.Value = GameState.Start;
+
+        private void Language()
+        {
+            _profilePlayer.CurrentState.Value = GameState.Language;
+        }
     }
 }

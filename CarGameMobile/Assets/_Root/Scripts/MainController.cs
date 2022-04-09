@@ -11,6 +11,7 @@ using Features.Shed;
 using Features.Shed.Upgrade;
 using Features.Inventory;
 using Features.Inventory.Items;
+using Ui.LanguageMenu;
 using Object = UnityEngine.Object;
 
 internal class MainController : BaseController
@@ -28,6 +29,7 @@ internal class MainController : BaseController
     private StartFightController _startFightController;
     private GameController _gameController;
     private FightController _fightController;
+    private LanguageMenuController _languageMenuController;
 
 
     public MainController(Transform placeForUi, ProfilePlayer profilePlayer)
@@ -73,6 +75,9 @@ internal class MainController : BaseController
             case GameState.Fight:
                 _fightController = new FightController(_placeForUi, _profilePlayer);
                 break;
+            case GameState.Language:
+                _languageMenuController = new LanguageMenuController(_placeForUi, _profilePlayer);
+                break;
         }
     }
 
@@ -85,6 +90,7 @@ internal class MainController : BaseController
         _startFightController?.Dispose();
         _gameController?.Dispose();
         _fightController?.Dispose();
+        _languageMenuController?.Dispose();
     }
 
     private void DisposeSubInstances()

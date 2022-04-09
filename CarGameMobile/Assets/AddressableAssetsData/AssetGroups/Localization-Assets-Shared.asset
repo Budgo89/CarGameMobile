@@ -21,6 +21,14 @@ MonoBehaviour:
     m_Address: Assets/_Root/Prefabs/Main Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
+  - m_GUID: 85eb851f36a872248a3df48feda5437c
+    m_Address: Assets/_Root/Prefabs/SettingsMenu Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+  - m_GUID: 9f9d1abb900b6c841be5d986adf67b1b
+    m_Address: Assets/_Root/Prefabs/Language Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: f2fd3f2671b0342c085196b05069e11a, type: 2}
   m_SchemaSet:
