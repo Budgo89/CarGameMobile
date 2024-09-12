@@ -10,30 +10,35 @@ namespace Game.TapeBackground
         private readonly SubscriptionProperty<float> _diff;
         private readonly ISubscriptionProperty<float> _leftMove;
         private readonly ISubscriptionProperty<float> _rightMove;
+        private readonly ISubscriptionProperty<float> _jumpMove;
 
         private TapeBackgroundView _view;
 
 
         public TapeBackgroundController(
             SubscriptionProperty<float> leftMove,
-            SubscriptionProperty<float> rightMove)
+            SubscriptionProperty<float> rightMove,
+            SubscriptionProperty<float> jumpMove)
         {
             _view = LoadView();
             _diff = new SubscriptionProperty<float>();
 
             _leftMove = leftMove;
             _rightMove = rightMove;
+            _jumpMove = jumpMove;
 
             _view.Init(_diff);
 
             _leftMove.SubscribeOnChange(MoveLeft);
             _rightMove.SubscribeOnChange(MoveRight);
+            _jumpMove.SubscribeOnChange(MoveJump);
         }
 
         protected override void OnDispose()
         {
             _leftMove.UnSubscribeOnChange(MoveLeft);
             _rightMove.UnSubscribeOnChange(MoveRight);
+            _jumpMove.UnSubscribeOnChange(MoveJump);
         }
 
 
@@ -51,5 +56,9 @@ namespace Game.TapeBackground
 
         private void MoveRight(float value) =>
             _diff.Value = value;
+
+        private void MoveJump(float value) =>
+            _diff.Value = 0;
     }
+    
 }

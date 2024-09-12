@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-namespace Services.IAP.Settings
+namespace Services.IAP
 {
     [CreateAssetMenu(fileName = nameof(ProductLibrary), menuName = "Settings/IAP/" + nameof(ProductLibrary))]
     internal class ProductLibrary : ScriptableObject
