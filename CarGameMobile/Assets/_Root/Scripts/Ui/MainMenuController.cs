@@ -20,12 +20,9 @@ namespace Ui
         {
             _profilePlayer = profilePlayer;
             _view = LoadView(placeForUi);
-            _view.Init(StartGame);
-            _view.InitSettings(SettingsGame);
+            _view.Init(StartGame, SettingsGame, Advertising, Purchase);
             _unityAdsTools = unityAdsTools;
-            _view.InitAdvertising(Advertising);
             _iapService = iapService;
-            _view.IninPurchase(Purchase);
 
         }
 

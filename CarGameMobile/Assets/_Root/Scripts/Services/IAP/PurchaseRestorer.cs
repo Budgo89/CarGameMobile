@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Purchasing;
 
 namespace Services.IAP
@@ -38,11 +33,9 @@ namespace Services.IAP
             }
         }
 
-        private void OnRestoredTransactions(bool result) =>
-            Log("RestorePurchases continuing: " + result +
-                ". If no further messages, no purchases available to restore.");
+        private void OnRestoredTransactions(bool result) => Log("RestorePurchases continuing: " + result +
+                                                                ". If no further messages, no purchases available to restore.");
 
-        private void Log(string message) =>
-            Debug.Log($"[{GetType().Name}] {message}");
+        private void Log(string message) => Debug.Log($"[{GetType().Name}] {message}");
     }
 }

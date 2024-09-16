@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Services.Ads.Settings;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Services.Ads.Settings
 {

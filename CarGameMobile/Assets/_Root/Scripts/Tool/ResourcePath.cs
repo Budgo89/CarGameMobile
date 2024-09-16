@@ -4,7 +4,6 @@ namespace Tool
     {
         public readonly string PathResource;
 
-        public ResourcePath(string pathResource) =>
-            PathResource = pathResource;
+        public ResourcePath(string pathResource) => PathResource = pathResource;
     }
 }

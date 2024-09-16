@@ -39,7 +39,6 @@ internal class MainController : BaseController
         _profilePlayer.CurrentState.UnSubscribeOnChange(OnChangeGameState);
     }
 
-
     private void OnChangeGameState(GameState state)
     {
         switch (state)

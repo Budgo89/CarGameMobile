@@ -1,4 +1,3 @@
-using Services.Analytics;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -12,20 +11,14 @@ namespace Ui
         [SerializeField] private Button _buttonAdvertising;
         [SerializeField] private Button _buttonPurchase;
 
-        public void Init(UnityAction startGame)
+        public void Init(UnityAction startGame, UnityAction settingsGame, UnityAction advertising, UnityAction purchase)
         {
             
             _buttonStart.onClick.AddListener(startGame);
+            _buttonSettings.onClick.AddListener(settingsGame);
+            _buttonAdvertising.onClick.AddListener(advertising);
+            _buttonPurchase.onClick.AddListener(purchase);
         }
-
-        public void InitSettings(UnityAction settingsGame) 
-            => _buttonSettings.onClick.AddListener(settingsGame);
-
-        public void InitAdvertising(UnityAction advertising)
-            => _buttonAdvertising.onClick.AddListener(advertising);
-
-        public void IninPurchase(UnityAction purchase)
-            => _buttonPurchase.onClick.AddListener(purchase);
 
         public void OnDestroy()
         {
