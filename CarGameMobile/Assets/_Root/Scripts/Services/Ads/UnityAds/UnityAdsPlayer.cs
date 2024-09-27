@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 using UnityEngine.Advertisements;
 
@@ -27,6 +27,8 @@ namespace Services.Ads.UnityAds
             Load();
             OnPlaying();
             Load();
+
+            Log("Play");
         }
 
         protected abstract void OnPlaying();

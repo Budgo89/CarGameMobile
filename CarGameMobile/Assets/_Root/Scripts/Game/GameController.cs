@@ -1,27 +1,112 @@
-using Game.Car;
+using Tool;
+using System;
+using System.Collections.Generic;
+using Profile;
+using Services;
+using UnityEngine;
 using Game.InputLogic;
 using Game.TapeBackground;
-using Profile;
-using Tool;
+using Game.Transport;
+using Game.Transport.Boat;
+using Game.Transport.Car;
+using Features.AbilitySystem;
+using Features.AbilitySystem.Abilities;
 
 namespace Game
 {
     internal class GameController : BaseController
     {
-        public GameController(ProfilePlayer profilePlayer)
-        {
-            var leftMoveDiff = new SubscriptionProperty<float>();
-            var rightMoveDiff = new SubscriptionProperty<float>();
+        private readonly ProfilePlayer _profilePlayer;
+        private readonly SubscriptionProperty<float> _leftMoveDiff;
+        private readonly SubscriptionProperty<float> _rightMoveDiff;
 
-            var tapeBackgroundController = new TapeBackgroundController(leftMoveDiff, rightMoveDiff);
+        private readonly TapeBackgroundController _tapeBackgroundController;
+        private readonly InputGameController _inputGameController;
+        private readonly TransportController _transportController;
+        private readonly IAbilitiesController _abilitiesController;
+
+
+        public GameController(Transform placeForUi, ProfilePlayer profilePlayer)
+        {
+            _profilePlayer = profilePlayer;
+            _leftMoveDiff = new SubscriptionProperty<float>();
+            _rightMoveDiff = new SubscriptionProperty<float>();
+
+            _tapeBackgroundController = CreateTapeBackground();
+            _inputGameController = CreateInputGameController();
+            _transportController = CreateTransportController(profilePlayer.CurrentTransport);
+            _abilitiesController = CreateAbilitiesController(placeForUi);
+
+            ServiceLocator.Analytics.SendGameStarted();
+        }
+
+
+        private TapeBackgroundController CreateTapeBackground()
+        {
+            var tapeBackgroundController = new TapeBackgroundController(_leftMoveDiff, _rightMoveDiff);
             AddController(tapeBackgroundController);
 
-            var inputGameController = new InputGameController(leftMoveDiff, rightMoveDiff, profilePlayer.CurrentCar);
+            return tapeBackgroundController;
+        }
+
+        private InputGameController CreateInputGameController()
+        {
+            var inputGameController = new InputGameController(_leftMoveDiff, _rightMoveDiff, _profilePlayer.CurrentTransport);
             AddController(inputGameController);
 
-            var carController = new CarController();
-            AddController(carController);
-            
+            return inputGameController;
+        }
+
+        private TransportController CreateTransportController(TransportModel transportModel)
+        {
+            TransportController transportController =
+                _profilePlayer.CurrentTransport.Type switch
+                {
+                    TransportType.Car => new CarController(transportModel),
+                    TransportType.Boat => new BoatController(transportModel),
+                    _ => throw new ArgumentException(nameof(TransportType))
+                };
+
+            AddController(transportController);
+
+            return transportController;
+        }
+
+        private IAbilitiesController CreateAbilitiesController(Transform placeForUi)
+        {
+            AbilityItemConfig[] abilityItemConfigs = LoadAbilityItemConfigs();
+            var repository = CreateAbilitiesRepository(abilityItemConfigs);
+            var view = LoadAbilitiesView(placeForUi);
+
+            var abilitiesController = new AbilitiesController(view, repository, abilityItemConfigs, _transportController);
+            AddController(abilitiesController);
+
+            return abilitiesController;
+        }
+
+        private AbilityItemConfig[] LoadAbilityItemConfigs()
+        {
+            var path = new ResourcePath("Configs/Ability/AbilityItemConfigDataSource");
+            return ContentDataSourceLoader.LoadAbilityItemConfigs(path);
+        }
+
+        private IAbilitiesRepository CreateAbilitiesRepository(IEnumerable<IAbilityItem> abilityItemConfigs)
+        {
+            var repository = new AbilitiesRepository(abilityItemConfigs);
+            AddRepository(repository);
+
+            return repository;
+        }
+
+        private IAbilitiesView LoadAbilitiesView(Transform placeForUi)
+        {
+            var path = new ResourcePath("Prefabs/Ability/AbilitiesView");
+
+            GameObject prefab = ResourcesLoader.LoadPrefab(path);
+            GameObject objectView = UnityEngine.Object.Instantiate(prefab, placeForUi, false);
+            AddGameObject(objectView);
+
+            return objectView.GetComponent<AbilitiesView>();
         }
     }
 }
