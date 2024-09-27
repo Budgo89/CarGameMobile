@@ -1,3 +1,4 @@
+using JoostenProductions;
 using Tool;
 using UnityEngine;
 
@@ -7,23 +8,37 @@ namespace Game.InputLogic
     {
         private SubscriptionProperty<float> _leftMove;
         private SubscriptionProperty<float> _rightMove;
+        private SubscriptionProperty<float> _jump;
         protected float _speed;
 
+        private void Start() =>
+            UpdateManager.SubscribeToUpdate(Move);
+
+        private void OnDestroy() =>
+            UpdateManager.UnsubscribeFromUpdate(Move);
+        
 
         public virtual void Init(
             SubscriptionProperty<float> leftMove,
             SubscriptionProperty<float> rightMove,
+            SubscriptionProperty<float> jump,
             float speed)
         {
             _leftMove = leftMove;
             _rightMove = rightMove;
+            _jump = jump;
             _speed = speed;
         }
+        
+        protected abstract void Move();
 
         protected virtual void OnLeftMove(float value) =>
             _leftMove.Value = value;
 
         protected virtual void OnRightMove(float value) =>
             _rightMove.Value = value;
+
+        protected virtual void OnJump(float value) =>
+            _jump.Value = 0;
     }
 }
